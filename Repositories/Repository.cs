@@ -6,7 +6,7 @@ namespace SistemasCafeBackEnd.Repositories
 {
     public class Repository
     {
-        private string dbConexion = "Data Source=localhost;Initial Catalog=mya;Persist Security Info=False;User Id=root;Password=;TrustServerCertificate=True;";
+        private string dbConexion = "workstation id=MYADataBase.mssql.somee.com;packet size=4096;user id=LuchoCeles_SQLLogin_1;pwd=x5ivqojpfh;data source=MYADataBase.mssql.somee.com;persist security info=False;initial catalog=MYADataBase;TrustServerCertificate=True";
 
         public Repository() { }
         
