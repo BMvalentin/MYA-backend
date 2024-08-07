@@ -23,4 +23,5 @@ public class ProductoController : ControllerBase
             return new BaseResponse(false, (int)HttpStatusCode.InternalServerError, ex.Message);
         }
     }
+    
 }
