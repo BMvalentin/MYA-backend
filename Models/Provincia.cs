@@ -1,3 +1,4 @@
+namespace MYABackend.Models;
 public class Provincia
 {
     public int IdProvincia { get; set; }

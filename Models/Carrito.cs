@@ -1,3 +1,4 @@
+namespace MYABackend.Models;
 public class Carrito
 {
     public int IdCarrito { get; set; }

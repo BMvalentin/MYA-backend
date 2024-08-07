@@ -1,3 +1,4 @@
+namespace MYABackend.Models;
 public class DetalleVenta
 {
     public int IdDetalleVenta { get; set; }
