@@ -6,7 +6,8 @@ namespace SistemasCafeBackEnd.Repositories
 {
     public class Repository
     {
-        private string dbConexion = "Server=localhost;Port=3306;Database=MYA;Uid=root;Pwd=";
+        private string dbConexion = "Data Source=localhost;Initial Catalog=mya;Persist Security Info=False;User Id=root;Password=;TrustServerCertificate=True;";
+
         public Repository() { }
         
         public async Task<dynamic> ExecuteProcedure(string procedureName, DynamicParameters parameters)
