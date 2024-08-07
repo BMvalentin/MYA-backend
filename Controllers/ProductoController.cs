@@ -1,5 +1,7 @@
 
+using Dapper;
 using Microsoft.AspNetCore.Mvc;
+using MYABackend.Models;
 using MYABackend.Responses;
 using SistemasCafeBackEnd.Repositories;
 using System.Net;
@@ -23,5 +25,42 @@ public class ProductoController : ControllerBase
             return new BaseResponse(false, (int)HttpStatusCode.InternalServerError, ex.Message);
         }
     }
-    
+
+    [HttpPost]
+    [Route("ProductoController/Post")]
+    public async Task<IActionResult> Post([FromForm] Producto upload)
+    {
+        if (upload == null || upload.File.Length == 0) return BadRequest("No se proporcionó ningún archivo.");
+
+        var path = Path.Combine("C:\\Users\\Usuario\\Desktop\\cine\\img_peliculas\\img_1\\", upload.File.FileName);
+
+        using (var stream = new FileStream(path, FileMode.Create))
+        {
+            await upload.File.CopyToAsync(stream);
+        }
+
+        var file = "\\img_peliculas\\img_1\\" + upload.File.FileName;
+        
+        upload.RutaImagen = file;
+
+        if (upload.Nombre == null || upload.Descripcion == null || upload.IdCategoria == 0 || upload.IdMarca == 0 ||
+        upload.Precio == 0 || upload.Stock == 0 || upload.RutaImagen == null || upload.File == null)
+        {
+            return BadRequest("No se proporcionó todos los datos necesarios.");
+        }
+
+        DynamicParameters dp = new DynamicParameters();
+
+        dp.Add("IdProducto", upload.IdProducto);
+        dp.Add("Nombre", upload.Nombre);
+        dp.Add("Descripcion", upload.Descripcion);
+        dp.Add("IdMarca", upload.IdMarca);
+        dp.Add("IdCategoria", upload.IdCategoria);
+        dp.Add("Precio", upload.Precio);
+        dp.Add("Stock", upload.Stock);
+        dp.Add("RutaImagen", upload.RutaImagen);
+
+        await repository.ExecuteProcedure("",dp);
+        return Ok(new { file });
+    }
 }
