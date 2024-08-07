@@ -32,15 +32,16 @@ public class ProductoController : ControllerBase
     {
         if (upload == null || upload.File.Length == 0) return BadRequest("No se proporcionó ningún archivo.");
 
-        var path = Path.Combine("C:\\Users\\Usuario\\Desktop\\cine\\img_peliculas\\img_1\\", upload.File.FileName);
+        //var path = Path.Combine("C:\\Users\\PC\\MYA-frontend\\assets\\img", upload.File.FileName);
+        var path = Path.Combine("C:\\Users\\Usuario\\MYA-frontend\\assets\\img", upload.File.FileName);
 
         using (var stream = new FileStream(path, FileMode.Create))
         {
             await upload.File.CopyToAsync(stream);
         }
 
-        var file = "\\img_peliculas\\img_1\\" + upload.File.FileName;
-        
+        var file = "MYA-frontend\\assets\\img" + upload.File.FileName;
+
         upload.RutaImagen = file;
 
         if (upload.Nombre == null || upload.Descripcion == null || upload.IdCategoria == 0 || upload.IdMarca == 0 ||
@@ -51,7 +52,6 @@ public class ProductoController : ControllerBase
 
         DynamicParameters dp = new DynamicParameters();
 
-        dp.Add("IdProducto", upload.IdProducto);
         dp.Add("Nombre", upload.Nombre);
         dp.Add("Descripcion", upload.Descripcion);
         dp.Add("IdMarca", upload.IdMarca);
@@ -60,7 +60,7 @@ public class ProductoController : ControllerBase
         dp.Add("Stock", upload.Stock);
         dp.Add("RutaImagen", upload.RutaImagen);
 
-        await repository.ExecuteProcedure("",dp);
+        await repository.ExecuteProcedure("crearProducto",dp);
         return Ok(new { file });
     }
 }
