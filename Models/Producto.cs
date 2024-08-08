@@ -8,5 +8,6 @@ public class Producto
     public decimal Precio { get; set; }
     public int Stock { get; set; }
     public string RutaImagen { get; set; }
+    public string DireccionActual { get; set; }
     public IFormFile File { get; set; }
 }
