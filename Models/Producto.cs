@@ -1,7 +1,6 @@
 namespace MYABackend.Models;
 public class Producto
 {
-    public int IdProducto { get; set; }
     public string Nombre { get; set; }
     public string Descripcion { get; set; }
     public int IdMarca { get; set; }
@@ -9,4 +8,6 @@ public class Producto
     public decimal Precio { get; set; }
     public int Stock { get; set; }
     public string RutaImagen { get; set; }
+    public string DireccionActual { get; set; }
+    public IFormFile File { get; set; }
 }
