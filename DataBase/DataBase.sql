@@ -23,7 +23,7 @@ CREATE TABLE producto (
   descripcion TEXT NOT NULL,
   id_marca INT NOT NULL,
   id_categoria INT NOT NULL,
-  precio DECIMAL(10, 0) NOT NULL,
+  precio DECIMAL(10, 2) NOT NULL,
   url_imagen TEXT NOT NULL,
   activo BIT NOT NULL DEFAULT 1,
   fecha_registro DATE NOT NULL DEFAULT GETDATE(),
@@ -66,19 +66,19 @@ CREATE TABLE carrito (
 );
 
 
--- Table structure for table localidad
-CREATE TABLE localidad (
-  id_localidad INT NOT NULL PRIMARY KEY IDENTITY(1,1),
+-- Table structure for table provincia
+CREATE TABLE provincia (
+  id_provincia INT NOT NULL PRIMARY KEY IDENTITY(1,1),
   nombre TEXT NOT NULL
 );
 
 
--- Table structure for table provincia
-CREATE TABLE provincia (
-  id_provincia INT NOT NULL PRIMARY KEY IDENTITY(1,1),
+-- Table structure for table localidad
+CREATE TABLE localidad (
+  id_localidad INT NOT NULL PRIMARY KEY IDENTITY(1,1),
   nombre TEXT NOT NULL,
-  id_localidad INT NOT NULL,
-  CONSTRAINT FK_provincia_localidad FOREIGN KEY (id_localidad) REFERENCES localidad(id_localidad)
+  id_provincia INT NOT NULL,
+  CONSTRAINT FK_localidad_provincia FOREIGN KEY (id_provincia) REFERENCES provincia(id_provincia)
 );
 
 
@@ -87,7 +87,7 @@ CREATE TABLE venta (
   id_venta INT NOT NULL PRIMARY KEY IDENTITY(1,1),
   id_usuario INT NOT NULL,
   total_producto INT NOT NULL,
-  monto_total DECIMAL(10, 0) NOT NULL,
+  monto_total DECIMAL(10, 2) NOT NULL,
   contacto TEXT NOT NULL,
   id_provincia INT NOT NULL,
   telefono INT NOT NULL,
@@ -105,9 +105,16 @@ CREATE TABLE detalleventa (
   id_venta INT NOT NULL,
   id_producto INT NOT NULL,
   cantidad INT NOT NULL,
-  total DECIMAL(10, 0) NOT NULL,
+  total DECIMAL(10, 2) NOT NULL,
   CONSTRAINT FK_detalleventa_venta FOREIGN KEY (id_venta) REFERENCES venta(id_venta),
   CONSTRAINT FK_detalleventa_producto FOREIGN KEY (id_producto) REFERENCES producto(id_producto)
 );
 
+ALTER TABLE usuario
+ADD CONSTRAINT uq_usuario_correo UNIQUE (correo);
 
+-- Indice compuesto en id_producto y talle, esto hace mas rapidas las busquedas por talle
+CREATE INDEX idx_producto_talle ON talle(id_producto, talle);
+
+-- Indice para los correos
+CREATE INDEX idx_usuario_email ON usuario(correo);
