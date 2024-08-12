@@ -55,19 +55,6 @@ CREATE TABLE usuario (
 );
 
 
--- Table structure for table cliente
--- No se usa mas la dejé por las dudas
-CREATE TABLE cliente (
-  id_cliente INT NOT NULL PRIMARY KEY IDENTITY(1,1),
-  nombre TEXT NOT NULL,
-  apellido TEXT NOT NULL,
-  correo TEXT NOT NULL,
-  clave TEXT NOT NULL,
-  reestablecer BIT NOT NULL DEFAULT 0,
-  fecha_registro DATE NOT NULL DEFAULT GETDATE()
-);
-
-
 -- Table structure for table carrito
 CREATE TABLE carrito (
   id_carrito INT NOT NULL PRIMARY KEY IDENTITY(1,1),
