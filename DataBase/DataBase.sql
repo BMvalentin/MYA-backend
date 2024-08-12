@@ -40,7 +40,23 @@ CREATE TABLE talle (
   CONSTRAINT FK_id_producto FOREIGN KEY (id_producto) REFERENCES producto(id_producto)
 );
 
+
+-- Table structure for table usuario
+CREATE TABLE usuario (
+  id_usuario INT NOT NULL PRIMARY KEY IDENTITY(1,1),
+  nombre TEXT NOT NULL,
+  apellido TEXT NOT NULL,
+  correo TEXT NOT NULL,
+  clave TEXT NOT NULL,
+  tipo_de_usuario BIT NOT NULL DEFAULT 1, -- usuario 1 normal, usuario 0 admin
+  reestablecer BIT NOT NULL DEFAULT 1,
+  activo BIT NOT NULL DEFAULT 1,
+  fecha_registro DATE NOT NULL DEFAULT GETDATE()
+);
+
+
 -- Table structure for table cliente
+-- No se usa mas la dejé por las dudas
 CREATE TABLE cliente (
   id_cliente INT NOT NULL PRIMARY KEY IDENTITY(1,1),
   nombre TEXT NOT NULL,
@@ -55,10 +71,10 @@ CREATE TABLE cliente (
 -- Table structure for table carrito
 CREATE TABLE carrito (
   id_carrito INT NOT NULL PRIMARY KEY IDENTITY(1,1),
-  id_cliente INT NOT NULL,
+  id_usuario INT NOT NULL,
   id_producto INT NOT NULL,
   cantidad INT NOT NULL,
-  CONSTRAINT FK_carrito_cliente FOREIGN KEY (id_cliente) REFERENCES cliente(id_cliente),
+  CONSTRAINT FK_carrito_usuario FOREIGN KEY (id_usuario) REFERENCES usuario(id_usuario),
   CONSTRAINT FK_carrito_producto FOREIGN KEY (id_producto) REFERENCES producto(id_producto)
 );
 
@@ -82,7 +98,7 @@ CREATE TABLE provincia (
 -- Table structure for table venta
 CREATE TABLE venta (
   id_venta INT NOT NULL PRIMARY KEY IDENTITY(1,1),
-  id_cliente INT NOT NULL,
+  id_usuario INT NOT NULL,
   total_producto INT NOT NULL,
   monto_total DECIMAL(10, 0) NOT NULL,
   contacto TEXT NOT NULL,
@@ -91,7 +107,7 @@ CREATE TABLE venta (
   direccion TEXT NOT NULL,
   id_transaccion INT NOT NULL,
   fecha_venta DATE NOT NULL DEFAULT GETDATE(),
-  CONSTRAINT FK_venta_cliente FOREIGN KEY (id_cliente) REFERENCES cliente(id_cliente),
+  CONSTRAINT FK_venta_usuario FOREIGN KEY (id_usuario) REFERENCES usuario(id_usuario),
   CONSTRAINT FK_venta_provincia FOREIGN KEY (id_provincia) REFERENCES provincia(id_provincia)
 );
 
@@ -108,14 +124,3 @@ CREATE TABLE detalleventa (
 );
 
 
--- Table structure for table usuario
-CREATE TABLE usuario (
-  id_usuario INT NOT NULL PRIMARY KEY IDENTITY(1,1),
-  nombre TEXT NOT NULL,
-  apellido TEXT NOT NULL,
-  correo TEXT NOT NULL,
-  clave TEXT NOT NULL,
-  reestablecer BIT NOT NULL DEFAULT 1,
-  activo BIT NOT NULL DEFAULT 1,
-  fecha_registro DATE NOT NULL DEFAULT GETDATE()
-);
