@@ -24,7 +24,6 @@ CREATE TABLE producto (
   id_marca INT NOT NULL,
   id_categoria INT NOT NULL,
   precio DECIMAL(10, 0) NOT NULL,
-  stock INT NOT NULL,
   url_imagen TEXT NOT NULL,
   activo BIT NOT NULL DEFAULT 1,
   fecha_registro DATE NOT NULL DEFAULT GETDATE(),
@@ -32,6 +31,14 @@ CREATE TABLE producto (
   CONSTRAINT FK_producto_categoria FOREIGN KEY (id_categoria) REFERENCES categoria(id_categoria)
 );
 
+CREATE TABLE talle (
+  id_talle INT NOT NULL PRIMARY KEY IDENTITY(1,1),
+  talle TEXT NOT NULL,
+  stock INT NOT NULL,
+  activo BIT NOT NULL DEFAULT 1,
+  id_producto INT NOT NULL,
+  CONSTRAINT FK_id_producto FOREIGN KEY (id_producto) REFERENCES producto(id_producto)
+);
 
 -- Table structure for table cliente
 CREATE TABLE cliente (
