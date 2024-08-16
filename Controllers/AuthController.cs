@@ -12,8 +12,8 @@ namespace MYABackend.Controllers;
 
 public class AuthController : ControllerBase
 {
-    Repository repository = new Repository();
-
+    private Repository repository = new Repository();
+    private IConfiguration _configuration;
     [HttpPost]
     [Route("AuthController/Login")]
     public async Task<BaseResponse> Login([FromBody] Auth auth)
