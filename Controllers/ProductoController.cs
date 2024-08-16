@@ -3,7 +3,7 @@ using Dapper;
 using Microsoft.AspNetCore.Mvc;
 using MYABackend.Models;
 using MYABackend.Responses;
-using SistemasCafeBackEnd.Repositories;
+using MYABackend.Repositories;
 using System.Net;
 
 namespace MYABackend.Controllers;

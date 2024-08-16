@@ -2,7 +2,7 @@ using Microsoft.Data.SqlClient;
 using Dapper;
 using System.Data;
 
-namespace SistemasCafeBackEnd.Repositories
+namespace MYABackend.Repositories
 {
     public class Repository
     {
