@@ -162,3 +162,4 @@ c:\Users\PC\MYA-backend\obj\Debug\net8.0\refint\MYA-backend.dll
 c:\Users\PC\MYA-backend\obj\Debug\net8.0\MYA-backend.pdb
 C:\Users\PC\MYA-backend\obj\Debug\net8.0\MYA-backend.genruntimeconfig.cache
 C:\Users\PC\MYA-backend\obj\Debug\net8.0\ref\MYA-backend.dll
+c:\Users\Usuario\MYA-backend\bin\Debug\net8.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
