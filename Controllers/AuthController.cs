@@ -13,7 +13,7 @@ namespace MYABackend.Controllers;
 public class AuthController : ControllerBase
 {
     Repository repository = new Repository();
-    
+
     [HttpPost]
     [Route("AuthController/Login")]
     public async Task<BaseResponse> Login([FromBody] Auth auth)
@@ -42,7 +42,7 @@ public class AuthController : ControllerBase
                 );
 
                 var jwt = new JwtSecurityTokenHandler().WriteToken(token);
-                return new DataResponse<dynamic>(true, (int)HttpStatusCode.OK, "Lista entidad", data: jwt);
+                return new DataResponse<dynamic>(true, (int)HttpStatusCode.OK, "JWT Creado", data: jwt);
             }
         }
         // Autenticación fallida
