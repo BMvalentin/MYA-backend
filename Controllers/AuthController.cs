@@ -27,17 +27,21 @@ public class AuthController : ControllerBase
     {
         if (auth.Correo != null && auth.Password != null)
         {
-            var rsp = await _repository.GetListFromProcedure<dynamic>("VerificarCorreo");// Comprobar correo, devuelve contraseña si lo encuentra
+            IEnumerable<dynamic> rsp = await _repository.GetListFromProcedure<dynamic>("VerificarCorreo");// Comprobar correo, devuelve contraseña si lo encuentra
             if (rsp != null)
             {
                 var clave = auth.HashearPassword();
-                if (rsp.FirstOrDefault() == clave)
+                var user = rsp.FirstOrDefault();
+
+                if (user.clave == clave)
                 {
+                    string tipo_usuario = user.tipo_de_usuario == 0 ? "admin" : "user";
                     var claims = new[]
                     {
                     new Claim(JwtRegisteredClaimNames.Sub, auth.Correo),
-                    new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()) //genera un token unico
-                };
+                    new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()), //genera un token unico
+                    new Claim("tipo_usuario",tipo_usuario)
+                    };
 
                     var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["Jwt:SecretKey"]));
                     var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);

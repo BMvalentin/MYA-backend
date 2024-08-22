@@ -104,8 +104,7 @@ CREATE TABLE detalleventa (
 );
 
 -- Agregar restricción única a la columna correo en la tabla usuario
-ALTER TABLE usuario
-ADD CONSTRAINT uq_usuario_correo UNIQUE (correo);
+ALTER TABLE usuario ADD CONSTRAINT uq_usuario_correo UNIQUE (correo);
 
 -- Indice compuesto en id_producto y talle para acelerar las búsquedas
 CREATE INDEX idx_producto_talle ON talle(id_producto, talle);

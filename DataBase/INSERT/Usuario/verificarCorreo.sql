@@ -2,5 +2,5 @@ CREATE PROCEDURE verificarCorreo
   @correo NVARCHAR(255)
 AS
 BEGIN
-    SELECT clave FROM cliente WHERE correo = @correo;
+  SELECT clave , tipo_de_usuario FROM usuario WHERE correo = @correo;
 END;
