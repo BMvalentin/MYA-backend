@@ -12,13 +12,12 @@ namespace MYABackend.Controllers;
 
 public class AuthController : ControllerBase
 {
-    private readonly Repository _repository;
+    private readonly Repository _repository = new Repository();
     private readonly IConfiguration _configuration; // me costó entenderlo pero basicamente el main instancia solo el IConfiguration y le pasa por constructor todo lo que hay en "appsettings.json", no hace falta instanciar esta clase
 
     public AuthController(IConfiguration configuration)
     {
-        _repository = new Repository();
-        _configuration = configuration;
+        this._configuration = configuration;
     }
 
     [HttpPost]
@@ -31,9 +30,9 @@ public class AuthController : ControllerBase
             if (rsp != null)
             {
                 var clave = auth.HashearPassword();
-                var user = rsp.FirstOrDefault();
+                UsuarioLogin user = (UsuarioLogin)rsp.FirstOrDefault();
 
-                if (user.clave == clave)
+                if (user.Clave == clave)
                 {
                     var jwt = GenerationToken(user);
                     return new DataResponse<dynamic>(true, (int)HttpStatusCode.OK, "JWT Creado", data: jwt);
@@ -43,11 +42,11 @@ public class AuthController : ControllerBase
         // Autenticación fallida
         return new BaseResponse(false, (int)HttpStatusCode.InternalServerError, "error");
     }
-    private JwtSecurityTokenHandler GenerationToken(var user){
-        string tipo_usuario = user.tipo_de_usuario == 0 ? "admin" : "user";
+    private string GenerationToken(UsuarioLogin user){
+        string tipo_usuario = user.Tipo_de_usuario == 0 ? "admin" : "user";
         var claims = new[]
         {
-            new Claim("tipo_usuario",user.tipo_usuario),
+            new Claim("tipo_usuario",tipo_usuario),
             new Claim("correo",user.Correo)
         };
 

@@ -1,7 +1,8 @@
 using Microsoft.AspNetCore.Identity;
+using System.ComponentModel.DataAnnotations;
 
 namespace MYABackend.Models;
-public class Auth
+public class Login
 {
     [Required(ErrorMessage = "El correo es requerido.")]
     public string Correo { get; set; }
