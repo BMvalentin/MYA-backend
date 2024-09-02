@@ -23,7 +23,7 @@ public class AuthController : ControllerBase
 
     [HttpPost]
     [Route("AuthController/Login")]
-    public async Task<BaseResponse> Login([FromBody] Auth auth)
+    public async Task<BaseResponse> Login([FromBody] Login auth)
     {
         if (auth.Correo != null && auth.Password != null)
         {
@@ -35,26 +35,7 @@ public class AuthController : ControllerBase
 
                 if (user.clave == clave)
                 {
-                    string tipo_usuario = user.tipo_de_usuario == 0 ? "admin" : "user";
-                    var claims = new[]
-                    {
-                    new Claim(JwtRegisteredClaimNames.Sub, auth.Correo),
-                    new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()), //genera un token unico
-                    new Claim("tipo_usuario",tipo_usuario)
-                    };
-
-                    var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["Jwt:SecretKey"]));
-                    var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
-
-                    var token = new JwtSecurityToken(
-                        issuer: _configuration["Jwt:Issuer"],// quien lo crea
-                        audience: _configuration["Jwt:Audience"], // a quien lo manda
-                        claims: claims, //una array con los datos del correo
-                        expires: DateTime.Now.AddMinutes(30), //dice cuanto va a durar el token, en este caso 30 minutos
-                        signingCredentials: creds //el token en si
-                    );
-
-                    var jwt = new JwtSecurityTokenHandler().WriteToken(token);
+                    var jwt = GenerationToken(user);
                     return new DataResponse<dynamic>(true, (int)HttpStatusCode.OK, "JWT Creado", data: jwt);
                 }
             }
@@ -62,5 +43,24 @@ public class AuthController : ControllerBase
         // Autenticación fallida
         return new BaseResponse(false, (int)HttpStatusCode.InternalServerError, "error");
     }
+    private JwtSecurityTokenHandler GenerationToken(var user){
+        string tipo_usuario = user.tipo_de_usuario == 0 ? "admin" : "user";
+        var claims = new[]
+        {
+            new Claim("tipo_usuario",user.tipo_usuario)
+            new Claim("correo",user.Correo)
+        };
 
+        var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["Jwt:SecretKey"]));
+        var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
+
+        var token = new JwtSecurityToken(
+            issuer: _configuration["Jwt:Issuer"],// quien lo crea
+            audience: _configuration["Jwt:Audience"], // a quien lo manda
+            claims: claims, //una array con los datos del correo
+            expires: DateTime.Now.AddMinutes(30), //dice cuanto va a durar el token, en este caso 30 minutos
+            signingCredentials: creds //el token en si
+        );
+        return new JwtSecurityTokenHandler().WriteToken(token);
+    }
 }
