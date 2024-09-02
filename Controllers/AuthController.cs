@@ -47,7 +47,7 @@ public class AuthController : ControllerBase
         string tipo_usuario = user.tipo_de_usuario == 0 ? "admin" : "user";
         var claims = new[]
         {
-            new Claim("tipo_usuario",user.tipo_usuario)
+            new Claim("tipo_usuario",user.tipo_usuario),
             new Claim("correo",user.Correo)
         };
 
