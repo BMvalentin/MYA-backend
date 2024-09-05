@@ -10,6 +10,7 @@ using System.Text;
 
 namespace MYABackend.Controllers;
 
+[ApiController]
 public class AuthController : ControllerBase
 {
     private readonly Repository _repository = new Repository();
@@ -26,22 +27,19 @@ public class AuthController : ControllerBase
     {
         if (auth.Correo != null && auth.Password != null)
         {
-            IEnumerable<dynamic> rsp = await _repository.GetListFromProcedure<dynamic>("VerificarCorreo");// Comprobar correo, devuelve contraseña si lo encuentra
+            UsuarioLogin rsp = await _repository.GetListFromProcedure<UsuarioLogin>("VerificarCorreo");// Comprobar correo, devuelve contraseña si lo encuentra
             if (rsp != null)
             {
-                var clave = auth.HashearPassword();
-                UsuarioLogin user = (UsuarioLogin)rsp.FirstOrDefault();
-
-                if (user.Clave == clave)
+                if (rsp.Clave == auth.HashearPassword())
                 {
-                    var jwt = GenerationToken(user);
+                    string jwt = GenerationToken(rsp);
                     return new DataResponse<dynamic>(true, (int)HttpStatusCode.OK, "JWT Creado", data: jwt);
                 }
             }
         }
-        // Autenticación fallida
         return new BaseResponse(false, (int)HttpStatusCode.InternalServerError, "error");
     }
+
     private string GenerationToken(UsuarioLogin user){
         string tipo_usuario = user.Tipo_de_usuario == 0 ? "admin" : "user";
         var claims = new[]
