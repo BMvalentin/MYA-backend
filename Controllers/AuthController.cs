@@ -27,12 +27,13 @@ public class AuthController : ControllerBase
     {
         if (auth.Correo != null && auth.Password != null)
         {
-            UsuarioLogin rsp = await _repository.GetListFromProcedure<UsuarioLogin>("VerificarCorreo");// Comprobar correo, devuelve contraseña si lo encuentra
+            List<UsuarioLogin> rsp = await _repository.GetListFromProcedure<UsuarioLogin>("VerificarCorreo");// Comprobar correo, devuelve contraseña si lo encuentra
             if (rsp != null)
             {
-                if (rsp.Clave == auth.HashearPassword())
+                UsuarioLogin user = rsp.FirstOrDefault();
+                if (user.Clave == auth.Password)
                 {
-                    string jwt = GenerationToken(rsp);
+                    string jwt = GenerationToken(user);
                     return new DataResponse<dynamic>(true, (int)HttpStatusCode.OK, "JWT Creado", data: jwt);
                 }
             }
