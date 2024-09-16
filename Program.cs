@@ -24,6 +24,15 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
         };
     });
 
+builder.Services.AddCors(options =>
+{
+    options.AddDefaultPolicy(policy => {
+        policy.AllowAnyHeader().AllowAnyMethod().AllowAnyOrigin();
+    });
+}
+);
+
+
 builder.Services.AddControllers();
 
 builder.Services.AddEndpointsApiExplorer();
@@ -43,7 +52,7 @@ app.UseHttpsRedirection();
 app.UseAuthentication();
 
 app.UseAuthorization();
-
 app.MapControllers();
+app.UseCors();
 
 app.Run();
