@@ -7,6 +7,7 @@ using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
+using Dapper;
 
 namespace MYABackend.Controllers;
 
@@ -27,7 +28,9 @@ public class AuthController : ControllerBase
     {
         if (auth.Correo != null && auth.Password != null)
         {
-            List<UsuarioLogin> rsp = await _repository.GetListFromProcedure<UsuarioLogin>("VerificarCorreo");// Comprobar correo, devuelve contraseña si lo encuentra
+            var dp = new DynamicParameters();
+            dp.Add("@correo",auth.Correo);
+            List<UsuarioLogin> rsp = await _repository.GetListFromProcedure<UsuarioLogin>("VerificarCorreo",dp);// Comprobar correo, devuelve contraseña si lo encuentra
             if (rsp != null)
             {
                 UsuarioLogin user = rsp.FirstOrDefault();
@@ -41,12 +44,12 @@ public class AuthController : ControllerBase
         return new BaseResponse(false, (int)HttpStatusCode.InternalServerError, "error");
     }
 
-    private string GenerationToken(UsuarioLogin user){
+    private string GenerationToken(UsuarioLogin user)
+    {
         string tipo_usuario = user.Tipo_de_usuario == 0 ? "admin" : "user";
         var claims = new[]
         {
-            new Claim("tipo_usuario",tipo_usuario),
-            new Claim("correo",user.Correo)
+            new Claim("tipo_usuario",tipo_usuario)
         };
 
         var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["Jwt:SecretKey"]));
