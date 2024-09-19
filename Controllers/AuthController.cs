@@ -46,10 +46,9 @@ public class AuthController : ControllerBase
 
     private string GenerationToken(UsuarioLogin user)
     {
-        string tipo_usuario = user.Tipo_de_usuario == 0 ? "admin" : "user";
         var claims = new[]
         {
-            new Claim("tipo_usuario",tipo_usuario)
+            new Claim("tipo_usuario",user.Tipo_de_usuario)
         };
 
         var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["Jwt:SecretKey"]));
