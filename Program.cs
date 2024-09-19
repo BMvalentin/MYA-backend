@@ -24,19 +24,17 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
         };
     });
 
-
-// Add services to the container.
 builder.Services.AddCors(options =>
 {
-    options.AddDefaultPolicy(policy =>
-    {
+    options.AddDefaultPolicy(policy => {
         policy.AllowAnyHeader().AllowAnyMethod().AllowAnyOrigin();
     });
-});
+}
+);
+
 
 builder.Services.AddControllers();
 
-// Swagger/OpenAPI configuration (optional, remove if not needed)
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
@@ -47,15 +45,14 @@ if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
     app.UseSwaggerUI();
-    app.UseDeveloperExceptionPage();
 }
 
 app.UseHttpsRedirection();
 
-app.UseAuthorization(); // Solo Authorization, sin autenticación
+app.UseAuthentication();
 
+app.UseAuthorization();
 app.MapControllers();
-
 app.UseCors();
 
 app.Run();

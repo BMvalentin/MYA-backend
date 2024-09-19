@@ -1,7 +1,9 @@
 {
   "ExpandedNodes": [
-    ""
+    "",
+    "\\Controllers",
+    "\\DataBase",
+    "\\Models"
   ],
-  "SelectedNode": "\\MYA-backend.generated.sln",
   "PreviewInSolutionExplorer": false
 }

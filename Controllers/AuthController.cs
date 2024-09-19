@@ -7,9 +7,11 @@ using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
+using Dapper;
 
 namespace MYABackend.Controllers;
 
+[ApiController]
 public class AuthController : ControllerBase
 {
     private readonly Repository _repository = new Repository();
@@ -26,28 +28,28 @@ public class AuthController : ControllerBase
     {
         if (auth.Correo != null && auth.Password != null)
         {
-            IEnumerable<dynamic> rsp = await _repository.GetListFromProcedure<dynamic>("VerificarCorreo");// Comprobar correo, devuelve contraseña si lo encuentra
+            var dp = new DynamicParameters();
+            dp.Add("@correo",auth.Correo);
+            List<UsuarioLogin> rsp = await _repository.GetListFromProcedure<UsuarioLogin>("VerificarCorreo",dp);// Comprobar correo, devuelve contraseña si lo encuentra
             if (rsp != null)
             {
-                var clave = auth.HashearPassword();
-                UsuarioLogin user = (UsuarioLogin)rsp.FirstOrDefault();
-
-                if (user.Clave == clave)
+                UsuarioLogin user = rsp.FirstOrDefault();
+                if (user.Clave == auth.Password)
                 {
-                    var jwt = GenerationToken(user);
+                    string jwt = GenerationToken(user);
                     return new DataResponse<dynamic>(true, (int)HttpStatusCode.OK, "JWT Creado", data: jwt);
                 }
             }
         }
-        // Autenticación fallida
         return new BaseResponse(false, (int)HttpStatusCode.InternalServerError, "error");
     }
-    private string GenerationToken(UsuarioLogin user){
+
+    private string GenerationToken(UsuarioLogin user)
+    {
         string tipo_usuario = user.Tipo_de_usuario == 0 ? "admin" : "user";
         var claims = new[]
         {
-            new Claim("tipo_usuario",tipo_usuario),
-            new Claim("correo",user.Correo)
+            new Claim("tipo_usuario",tipo_usuario)
         };
 
         var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["Jwt:SecretKey"]));

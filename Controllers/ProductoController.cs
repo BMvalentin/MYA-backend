@@ -8,6 +8,7 @@ using System.Net;
 
 namespace MYABackend.Controllers;
 
+[ApiController]
 public class ProductoController : ControllerBase
 {
     private Repository repository = new Repository();
