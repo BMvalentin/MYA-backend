@@ -14,6 +14,7 @@ public class ProductoController : ControllerBase
     private Repository repository = new Repository();
     [HttpGet]
     [Route("ProductoController/Get")]
+    
     public async Task<BaseResponse> Get()
     {
         try
