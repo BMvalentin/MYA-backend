@@ -5,5 +5,5 @@ CREATE PROCEDURE CrearUsuario
     @password NVARCHAR(255)
 AS
 BEGIN
-    INSERT INTO usuario (nombre,apellido,correo,clave) VALUES (@nombre,@apellido,@correo,@password);
+    INSERT INTO usuario (nombre,apellido,correo,clave,id_rol) VALUES (@nombre,@apellido,@correo,@password,1);
 END;
