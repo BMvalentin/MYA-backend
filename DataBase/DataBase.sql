@@ -1,6 +1,6 @@
 -- Table structure for table marca
 CREATE TABLE marca (
-  id_marca INT NOT NULL PRIMARY KEY IDENTITY(1,1),
+  id_marca INT NOT NULL PRIMARY KEY IDENTITY(1,1) CHECK (Id >= 0),
   descripcion NVARCHAR(255) NOT NULL,
   activo BIT NOT NULL DEFAULT 1,
   fecha_registro DATE NOT NULL DEFAULT GETDATE()
@@ -8,7 +8,7 @@ CREATE TABLE marca (
 
 -- Table structure for table categoria
 CREATE TABLE categoria (
-  id_categoria INT NOT NULL PRIMARY KEY IDENTITY(1,1),
+  id_categoria INT NOT NULL PRIMARY KEY IDENTITY(1,1) CHECK (Id >= 0),
   descripcion NVARCHAR(255) NOT NULL,
   activo BIT NOT NULL DEFAULT 1,
   fecha_registro DATE NOT NULL DEFAULT GETDATE()
@@ -16,7 +16,7 @@ CREATE TABLE categoria (
 
 -- Table structure for table producto
 CREATE TABLE producto (
-  id_producto INT NOT NULL PRIMARY KEY IDENTITY(1,1),
+  id_producto INT NOT NULL PRIMARY KEY IDENTITY(1,1) CHECK (Id >= 0),
   nombre NVARCHAR(255) NOT NULL,
   descripcion NVARCHAR(MAX) NOT NULL,
   id_marca INT NOT NULL,
@@ -31,7 +31,7 @@ CREATE TABLE producto (
 
 -- Table structure for table talle
 CREATE TABLE talle (
-  id_talle INT NOT NULL PRIMARY KEY IDENTITY(1,1),
+  id_talle INT NOT NULL PRIMARY KEY IDENTITY(1,1) CHECK (Id >= 0),
   talle NVARCHAR(50) NOT NULL,
   stock INT NOT NULL,
   activo BIT NOT NULL DEFAULT 1,
@@ -41,7 +41,7 @@ CREATE TABLE talle (
 
 -- Table structure for table usuario
 CREATE TABLE usuario (
-  id_usuario INT NOT NULL PRIMARY KEY IDENTITY(1,1),
+  id_usuario INT NOT NULL PRIMARY KEY IDENTITY(1,1) CHECK (Id >= 0),
   nombre NVARCHAR(255) NOT NULL,
   apellido NVARCHAR(255) NOT NULL,
   correo NVARCHAR(255) NOT NULL,
@@ -54,7 +54,7 @@ CREATE TABLE usuario (
 
 -- Table structure for table carrito
 CREATE TABLE carrito (
-  id_carrito INT NOT NULL PRIMARY KEY IDENTITY(1,1),
+  id_carrito INT NOT NULL PRIMARY KEY IDENTITY(1,1) CHECK (Id >= 0),
   id_usuario INT NOT NULL,
   id_producto INT NOT NULL,
   cantidad INT NOT NULL,
@@ -64,13 +64,13 @@ CREATE TABLE carrito (
 
 -- Table structure for table provincia
 CREATE TABLE provincia (
-  id_provincia INT NOT NULL PRIMARY KEY IDENTITY(1,1),
+  id_provincia INT NOT NULL PRIMARY KEY IDENTITY(1,1) CHECK (Id >= 0),
   nombre NVARCHAR(255) NOT NULL
 );
 
 -- Table structure for table localidad
 CREATE TABLE localidad (
-  id_localidad INT NOT NULL PRIMARY KEY IDENTITY(1,1),
+  id_localidad INT NOT NULL PRIMARY KEY IDENTITY(1,1) CHECK (Id >= 0),
   nombre NVARCHAR(255) NOT NULL,
   id_provincia INT NOT NULL,
   CONSTRAINT FK_localidad_provincia FOREIGN KEY (id_provincia) REFERENCES provincia(id_provincia)
@@ -78,7 +78,7 @@ CREATE TABLE localidad (
 
 -- Table structure for table venta
 CREATE TABLE venta (
-  id_venta INT NOT NULL PRIMARY KEY IDENTITY(1,1),
+  id_venta INT NOT NULL PRIMARY KEY IDENTITY(1,1) CHECK (Id >= 0),
   id_usuario INT NOT NULL,
   total_producto INT NOT NULL,
   monto_total DECIMAL(10, 2) NOT NULL,
@@ -94,7 +94,7 @@ CREATE TABLE venta (
 
 -- Table structure for table detalleventa
 CREATE TABLE detalleventa (
-  id_detalleVenta INT NOT NULL PRIMARY KEY IDENTITY(1,1),
+  id_detalleVenta INT NOT NULL PRIMARY KEY IDENTITY(1,1) CHECK (Id >= 0),
   id_venta INT NOT NULL,
   id_producto INT NOT NULL,
   cantidad INT NOT NULL,
@@ -104,8 +104,7 @@ CREATE TABLE detalleventa (
 );
 
 -- Agregar restricción única a la columna correo en la tabla usuario
-ALTER TABLE usuario
-ADD CONSTRAINT uq_usuario_correo UNIQUE (correo);
+ALTER TABLE usuario ADD CONSTRAINT uq_usuario_correo UNIQUE (correo);
 
 -- Indice compuesto en id_producto y talle para acelerar las búsquedas
 CREATE INDEX idx_producto_talle ON talle(id_producto, talle);
