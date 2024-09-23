@@ -74,6 +74,7 @@ public class ProductoController : ControllerBase
         dp.Add("IdMarca", upload.IdMarca);
         dp.Add("IdCategoria", upload.IdCategoria);
         dp.Add("Precio", upload.Precio);
+        dp.Add("IdTalle", upload.Precio); //falta arreglar esto, para mas tarde
         dp.Add("Stock", upload.Stock);
         dp.Add("RutaImagen", upload.RutaImagen);
 

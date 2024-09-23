@@ -3,16 +3,15 @@ CREATE PROCEDURE crearProducto
   @Descripcion NVARCHAR(MAX),
   @IdMarca INT,
   @IdCategoria INT,
-  @Precio DECIMAL,
-  @Talle NVARCHAR(50),
+  @Precio DECIMAL(10,2),
+  @IdTalle INT,
   @Stock INT,
   @RutaImagen NVARCHAR(255)
 AS
 BEGIN
   INSERT INTO Producto (nombre,descripcion,id_marca,id_categoria,precio,url_imagen) VALUES (@Nombre, @Descripcion, @IdMarca, @IdCategoria, @Precio, @RutaImagen);
   
-  DECLARE @IdProducto INT;
-  SELECT TOP 1 @IdProducto = id_producto FROM producto ORDER BY id_producto DESC;
+  DECLARE @IdProducto INT = SCOPE_IDENTITY();
 
-  INSERT INTO talle (talle,stock,id_producto) VALUES (@Talle,@Stock,@IdProducto);
+  INSERT INTO stock (id_producto,id_talle) VALUES (@IdProducto,@IdTalle);
 END;
