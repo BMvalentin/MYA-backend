@@ -67,6 +67,26 @@
   },
   {
     "ContainingType": "MYABackend.Controllers.ProductoController",
+    "Method": "GetTalle",
+    "RelativePath": "ProductoController/GetTalle",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": [
+      {
+        "Type": "MYABackend.Responses.BaseResponse",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "MYABackend.Controllers.ProductoController",
     "Method": "Post",
     "RelativePath": "ProductoController/Post",
     "HttpMethod": "POST",

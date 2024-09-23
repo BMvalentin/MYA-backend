@@ -32,11 +32,18 @@ CREATE TABLE producto (
 -- Table structure for table talle
 CREATE TABLE talle (
   id_talle INT NOT NULL PRIMARY KEY IDENTITY(1,1),
-  talle NVARCHAR(50) NOT NULL,
-  stock INT NOT NULL,
+  talle NVARCHAR(50) NOT NULL
+);
+
+-- Table structure for table stock
+CREATE TABLE stock (
+  id_stock INT NOT NULL PRIMARY KEY IDENTITY(1,1),
+  stock NVARCHAR(50) NOT NULL,
   activo BIT NOT NULL DEFAULT 1,
   id_producto INT NOT NULL,
-  CONSTRAINT FK_id_producto FOREIGN KEY (id_producto) REFERENCES producto(id_producto)
+  id_talle INT NOT NULL,
+  CONSTRAINT FK_stock_talle FOREIGN KEY (id_talle) REFERENCES talle(id_talle),
+  CONSTRAINT FK_stock_producto FOREIGN KEY (id_producto) REFERENCES producto(id_producto)
 );
 
 -- Table structure for table rol
@@ -110,10 +117,33 @@ CREATE TABLE detalleventa (
   CONSTRAINT FK_detalleventa_producto FOREIGN KEY (id_producto) REFERENCES producto(id_producto)
 );
 
--- Indice compuesto en id_producto y talle para acelerar las búsquedas
-CREATE INDEX idx_producto_talle ON talle(id_producto, talle);
 
 -- Indice para los correos en la tabla usuario
 CREATE INDEX idx_usuario_email ON usuario(correo);
 
 INSERT INTO rol (nombre_rol) VALUES ('Usuario'),('Admin');
+
+INSERT INTO talle (talle) VALUES 
+('34.5 [US 4]'),
+('35 [US 4.5]'),
+('35.5 [US 5]'),
+('36 [US 5.5]'),
+('36.5 [US 6]'),
+('37 [US 6.5]'),
+('37.5 [US 7]'),
+('38 [US 7.5]'),
+('38.5 [US 8]'),
+('39 [US 8.5]'),
+('39.5 [US 9]'),
+('40 [US 9.5]'),
+('40.5 [US 10]'),
+('41 [US 10.5]'),
+('41.5 [US 11]'),
+('42 [US 11.5]'),
+('42.5 [US 12]'),
+('43 [US 12.5]'),
+('43.5 [US 13]'),
+('44 [US 13.5]'),
+('44.5 [US 14]'),
+('45 [US 14.5]'),
+('46 [US 15]');

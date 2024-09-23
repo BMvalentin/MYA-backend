@@ -3,10 +3,6 @@
   "WorkspaceRootPath": "C:\\Users\\hilet.HILET\\MYA-backend\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{2AE56D11-9770-4DF0-93A6-6050CE865F5A}|MYA-backend.csproj|C:\\Users\\hilet.HILET\\MYA-backend\\controllers\\usuariocontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{2AE56D11-9770-4DF0-93A6-6050CE865F5A}|MYA-backend.csproj|solutionrelative:controllers\\usuariocontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{2AE56D11-9770-4DF0-93A6-6050CE865F5A}|MYA-backend.csproj|c:\\users\\hilet.hilet\\mya-backend\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{2AE56D11-9770-4DF0-93A6-6050CE865F5A}|MYA-backend.csproj|solutionrelative:program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
@@ -22,37 +18,24 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 1,
+          "SelectedChildIndex": 0,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 0,
               "Title": "Program.cs",
               "DocumentMoniker": "C:\\Users\\hilet.HILET\\MYA-backend\\Program.cs",
               "RelativeDocumentMoniker": "Program.cs",
               "ToolTip": "C:\\Users\\hilet.HILET\\MYA-backend\\Program.cs",
               "RelativeToolTip": "Program.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAIAAAAlAAAA",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAABAAAAAiAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-09-19T11:19:52.548Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "UsuarioController.cs",
-              "DocumentMoniker": "C:\\Users\\hilet.HILET\\MYA-backend\\Controllers\\UsuarioController.cs",
-              "RelativeDocumentMoniker": "Controllers\\UsuarioController.cs",
-              "ToolTip": "C:\\Users\\hilet.HILET\\MYA-backend\\Controllers\\UsuarioController.cs",
-              "RelativeToolTip": "Controllers\\UsuarioController.cs",
-              "ViewState": "AQIAAA4AAAAAAAAAAAAxwA8AAAABAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-09-16T11:40:00.176Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 1,
               "Title": "AuthController.cs",
               "DocumentMoniker": "C:\\Users\\hilet.HILET\\MYA-backend\\Controllers\\AuthController.cs",
               "RelativeDocumentMoniker": "Controllers\\AuthController.cs",
