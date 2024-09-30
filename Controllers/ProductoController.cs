@@ -44,13 +44,13 @@ public class ProductoController : ControllerBase
     }
 
     [HttpPost]
-    [Route("ProductoController/Post")]
-    public async Task<IActionResult> Post([FromForm] Producto upload)
+    [Route("ProductoController/PostU")]
+    public async Task<IActionResult> PostU([FromForm] Producto upload)
     {
         if (upload == null || upload.File.Length == 0) return BadRequest("No se proporcionó ningún archivo.");
 
         //var path = Path.Combine("C:\\Users\\PC\\MYA-frontend\\assets\\img", upload.File.FileName);
-        var path = Path.Combine("C:\\Users\\Usuario\\MYA-frontend\\assets\\img", upload.File.FileName);
+        var path = Path.Combine("MYA-frontend\\assets\\img", upload.File.FileName);
 
         using (var stream = new FileStream(path, FileMode.Create))
         {
@@ -69,14 +69,14 @@ public class ProductoController : ControllerBase
 
         DynamicParameters dp = new DynamicParameters();
 
-        dp.Add("Nombre", upload.Nombre);
-        dp.Add("Descripcion", upload.Descripcion);
+        dp.Add("Nombre", upload.Nombre);//listo
+        dp.Add("Descripcion", upload.Descripcion);//listo
         dp.Add("IdMarca", upload.IdMarca);
         dp.Add("IdCategoria", upload.IdCategoria);
-        dp.Add("Precio", upload.Precio);
-        dp.Add("IdTalle", upload.Precio); //falta arreglar esto, para mas tarde
-        dp.Add("Stock", upload.Stock);
-        dp.Add("RutaImagen", upload.RutaImagen);
+        dp.Add("Precio", upload.Precio);//listo
+        dp.Add("IdTalle", upload.IdTalle);//listo
+        dp.Add("Stock", upload.Stock);//listo
+        dp.Add("RutaImagen", upload.RutaImagen);//listo
 
         await repository.ExecuteProcedure("crearProducto",dp);
         return Ok(new { file });

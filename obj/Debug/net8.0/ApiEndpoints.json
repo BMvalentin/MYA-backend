@@ -87,8 +87,8 @@
   },
   {
     "ContainingType": "MYABackend.Controllers.ProductoController",
-    "Method": "Post",
-    "RelativePath": "ProductoController/Post",
+    "Method": "PostU",
+    "RelativePath": "ProductoController/PostU",
     "HttpMethod": "POST",
     "IsController": true,
     "Order": 0,
@@ -110,6 +110,11 @@
       },
       {
         "Name": "IdCategoria",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "IdTalle",
         "Type": "System.Int32",
         "IsRequired": false
       },
