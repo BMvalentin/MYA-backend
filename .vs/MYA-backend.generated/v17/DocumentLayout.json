@@ -7,16 +7,8 @@
       "RelativeMoniker": "D:0:0:{2AE56D11-9770-4DF0-93A6-6050CE865F5A}|MYA-backend.csproj|solutionrelative:controllers\\productocontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{2AE56D11-9770-4DF0-93A6-6050CE865F5A}|MYA-backend.csproj|c:\\users\\hilet.hilet\\mya-backend\\database\\insert\\producto\\crearproducto.sql||{3B902123-F8A7-4915-9F01-361F908088D0}",
-      "RelativeMoniker": "D:0:0:{2AE56D11-9770-4DF0-93A6-6050CE865F5A}|MYA-backend.csproj|solutionrelative:database\\insert\\producto\\crearproducto.sql||{3B902123-F8A7-4915-9F01-361F908088D0}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{2AE56D11-9770-4DF0-93A6-6050CE865F5A}|MYA-backend.csproj|c:\\users\\hilet.hilet\\mya-backend\\models\\producto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{2AE56D11-9770-4DF0-93A6-6050CE865F5A}|MYA-backend.csproj|solutionrelative:models\\producto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{2AE56D11-9770-4DF0-93A6-6050CE865F5A}|MYA-backend.csproj|C:\\Users\\hilet.HILET\\MYA-backend\\database\\database.sql||{3B902123-F8A7-4915-9F01-361F908088D0}",
-      "RelativeMoniker": "D:0:0:{2AE56D11-9770-4DF0-93A6-6050CE865F5A}|MYA-backend.csproj|solutionrelative:database\\database.sql||{3B902123-F8A7-4915-9F01-361F908088D0}"
+      "AbsoluteMoniker": "D:0:0:{2AE56D11-9770-4DF0-93A6-6050CE865F5A}|MYA-backend.csproj|c:\\users\\hilet.hilet\\mya-backend\\controllers\\usuariocontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2AE56D11-9770-4DF0-93A6-6050CE865F5A}|MYA-backend.csproj|solutionrelative:controllers\\usuariocontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -26,32 +18,19 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 2,
+          "SelectedChildIndex": 1,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "Producto.cs",
-              "DocumentMoniker": "C:\\Users\\hilet.HILET\\MYA-backend\\Models\\Producto.cs",
-              "RelativeDocumentMoniker": "Models\\Producto.cs",
-              "ToolTip": "C:\\Users\\hilet.HILET\\MYA-backend\\Models\\Producto.cs",
-              "RelativeToolTip": "Models\\Producto.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAcAAAAWAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-09-30T12:26:29.66Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
               "DocumentIndex": 1,
-              "Title": "crearProducto.sql",
-              "DocumentMoniker": "C:\\Users\\hilet.HILET\\MYA-backend\\DataBase\\INSERT\\Producto\\crearProducto.sql",
-              "RelativeDocumentMoniker": "DataBase\\INSERT\\Producto\\crearProducto.sql",
-              "ToolTip": "C:\\Users\\hilet.HILET\\MYA-backend\\DataBase\\INSERT\\Producto\\crearProducto.sql",
-              "RelativeToolTip": "DataBase\\INSERT\\Producto\\crearProducto.sql",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAABAAAAAEAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000826|",
-              "WhenOpened": "2024-09-30T12:26:10.512Z",
+              "Title": "UsuarioController.cs",
+              "DocumentMoniker": "C:\\Users\\hilet.HILET\\MYA-backend\\Controllers\\UsuarioController.cs",
+              "RelativeDocumentMoniker": "Controllers\\UsuarioController.cs",
+              "ToolTip": "C:\\Users\\hilet.HILET\\MYA-backend\\Controllers\\UsuarioController.cs",
+              "RelativeToolTip": "Controllers\\UsuarioController.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-07T11:31:23.496Z",
               "EditorCaption": ""
             },
             {
@@ -62,22 +41,10 @@
               "RelativeDocumentMoniker": "Controllers\\ProductoController.cs",
               "ToolTip": "C:\\Users\\hilet.HILET\\MYA-backend\\Controllers\\ProductoController.cs",
               "RelativeToolTip": "Controllers\\ProductoController.cs",
-              "ViewState": "AQIAADgAAAAAAAAAAAAawEoAAAAbAAAA",
+              "ViewState": "AQIAAAYAAAAAAAAAAAAAABQAAABVAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-09-27T12:08:13.704Z",
+              "WhenOpened": "2024-10-07T11:22:11.082Z",
               "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "DataBase.sql",
-              "DocumentMoniker": "C:\\Users\\hilet.HILET\\MYA-backend\\DataBase\\DataBase.sql",
-              "RelativeDocumentMoniker": "DataBase\\DataBase.sql",
-              "ToolTip": "C:\\Users\\hilet.HILET\\MYA-backend\\DataBase\\DataBase.sql",
-              "RelativeToolTip": "DataBase\\DataBase.sql",
-              "ViewState": "AQIAAB4AAAAAAAAAAAAAACEAAAAKAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000826|",
-              "WhenOpened": "2024-09-27T12:41:34.737Z"
             }
           ]
         }
