@@ -1,13 +1,13 @@
-using Microsoft.AspNetCore.Mvc;
-using MYABackend.Responses;
-using MYABackend.Repositories;
-using MYABackend.Models;
-using System.Net;
-using Microsoft.IdentityModel.Tokens;
+using Microsoft.AspNetCore.Authorization;
 using System.IdentityModel.Tokens.Jwt;
+using Microsoft.IdentityModel.Tokens;
+using Microsoft.AspNetCore.Mvc;
+using MYABackend.Repositories;
+using MYABackend.Responses;
 using System.Security.Claims;
+using MYABackend.Models;
 using System.Text;
-using Dapper;
+using System.Net;
 
 namespace MYABackend.Controllers;
 
@@ -24,17 +24,16 @@ public class AuthController : ControllerBase
 
     [HttpPost]
     [Route("AuthController/Login")]
+    [AllowAnonymous]
     public async Task<BaseResponse> Login([FromBody] Login auth)
     {
         if (auth.Correo != null && auth.Password != null)
         {
-            var dp = new DynamicParameters();
-            dp.Add("@correo",auth.Correo);
-            List<UsuarioLogin> rsp = await _repository.GetListFromProcedure<UsuarioLogin>("VerificarCorreo",dp);// Comprobar correo, devuelve contraseña si lo encuentra
+            List<UsuarioLogin> rsp = await _repository.GetListFromProcedure<UsuarioLogin>("verificarCorreo", auth.verificarCorreo());
             if (rsp != null)
             {
                 UsuarioLogin user = rsp.FirstOrDefault();
-                if (user.Clave == auth.Password)
+                if (user.clave == auth.Password)
                 {
                     string jwt = GenerationToken(user);
                     return new DataResponse<dynamic>(true, (int)HttpStatusCode.OK, "JWT Creado", data: jwt);
@@ -48,7 +47,7 @@ public class AuthController : ControllerBase
     {
         var claims = new[]
         {
-            new Claim("tipo_usuario",user.Tipo_de_usuario)
+            new Claim("tipo_usuario",user.tipo_de_usuario)
         };
 
         var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["Jwt:SecretKey"]));

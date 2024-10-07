@@ -1,9 +1,10 @@
-using Dapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using MYABackend.Models;
-using MYABackend.Responses;
 using MYABackend.Repositories;
+using MYABackend.Responses;
+using MYABackend.Models;
 using System.Net;
+using System.Text.Json;
 
 namespace MYABackend.Controllers;
 
@@ -14,6 +15,7 @@ public class ProductoController : ControllerBase
 
     [HttpGet]
     [Route("ProductoController/Get")]
+    [AllowAnonymous]
     public async Task<BaseResponse> Get()
     {
         try
@@ -29,6 +31,7 @@ public class ProductoController : ControllerBase
 
     [HttpGet]
     [Route("ProductoController/GetTalle")]
+    [Authorize(Policy ="Admin")]
     public async Task<BaseResponse> GetTalle()
     {
         try
@@ -44,6 +47,7 @@ public class ProductoController : ControllerBase
     
     [HttpGet]
     [Route("ProductoController/GetMarca")]
+    [Authorize(Policy ="Admin")]
     public async Task<BaseResponse> GetMarca()
     {
         try
@@ -59,6 +63,7 @@ public class ProductoController : ControllerBase
     
     [HttpGet]
     [Route("ProductoController/GetCategoria")]
+    [Authorize(Policy ="Admin")]
     public async Task<BaseResponse> GetCategoria()
     {
         try
@@ -74,40 +79,44 @@ public class ProductoController : ControllerBase
 
     [HttpPost]
     [Route("ProductoController/PostU")]
+    [Authorize(Policy ="Admin")]
     public async Task<IActionResult> PostU([FromForm] Producto upload)
     {
         if (upload == null || upload.File.Length == 0) return BadRequest("No se proporcionó ningún archivo.");
 
-        //var path = Path.Combine("C:\\Users\\PC\\MYA-frontend\\assets\\img", upload.File.FileName);
-        var path = Path.Combine("MYA-frontend\\assets\\img", upload.File.FileName);
-
-        using (var stream = new FileStream(path, FileMode.Create))
+        var files = new List<string>();
+        foreach (var file in upload.File)
         {
-            await upload.File.CopyToAsync(stream);
+            if (file.Length > 0)
+            {
+                var fileName = Path.GetFileName(file.FileName);
+                var path = Path.Combine("MYA-frontend", "assets", "img", fileName);
+                try
+                {
+                    using (var stream = new FileStream(path, FileMode.Create))
+                    {
+                        await file.CopyToAsync(stream);
+                    }
+                    files.Add(Path.Combine("assets", "img", fileName)); // Guardar la ruta relativa
+                }
+                catch (Exception ex)
+                {
+                    return StatusCode(500, $"Error al subir el archivo: {ex.Message}");
+                }
+            }
         }
 
-        var file = "MYA-frontend\\assets\\img" + upload.File.FileName;
+        upload.RutaImagen = JsonSerializer.Serialize(files);
 
-        upload.RutaImagen = file;
-
-        if (upload.Nombre == null || upload.Descripcion == null || upload.IdCategoria == 0 || upload.IdMarca == 0 ||
-        upload.Precio == 0 || upload.Stock == 0 || upload.RutaImagen == null || upload.File == null)
+        if (string.IsNullOrEmpty(upload.Nombre) || string.IsNullOrEmpty(upload.Descripcion) ||
+           upload.IdCategoria == 0 || upload.IdMarca == 0 || upload.Precio <= 0 ||
+           upload.Stock <= 0 || string.IsNullOrEmpty(upload.RutaImagen))
         {
             return BadRequest("No se proporcionó todos los datos necesarios.");
         }
 
-        DynamicParameters dp = new DynamicParameters();
+        await repository.ExecuteProcedure("crearProducto",upload.crearProducto());
 
-        dp.Add("Nombre", upload.Nombre);//listo
-        dp.Add("Descripcion", upload.Descripcion);//listo
-        dp.Add("IdMarca", upload.IdMarca);
-        dp.Add("IdCategoria", upload.IdCategoria);
-        dp.Add("Precio", upload.Precio);//listo
-        dp.Add("IdTalle", upload.IdTalle);//listo
-        dp.Add("Stock", upload.Stock);//listo
-        dp.Add("RutaImagen", upload.RutaImagen);//listo
-
-        await repository.ExecuteProcedure("crearProducto",dp);
-        return Ok(new { file });
+        return Ok(new { files });
     }
 }

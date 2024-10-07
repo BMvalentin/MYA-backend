@@ -34,7 +34,7 @@ builder.Services.AddCors(options =>
 
 builder.Services.AddAuthorization(options =>
 {
-    options.AddPolicy("Admin", policy => policy.RequireClaim("tipo_usuario", "admin"));
+    options.AddPolicy("Admin", policy => policy.RequireClaim("tipo_usuario", "Admin"));
 });
 
 builder.Services.AddControllers();

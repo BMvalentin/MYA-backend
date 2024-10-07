@@ -1,3 +1,5 @@
+using Dapper;
+
 namespace MYABackend.Models;
 public class Usuario
 {
@@ -6,4 +8,14 @@ public class Usuario
     public string Apellidos { get; set; }
     public string Correo { get; set; }
     public string Password { get; set; }
+
+    public DynamicParameters crearUsuario ()
+    {
+        var dp = new DynamicParameters();
+        dp.Add("@nombre", Nombres);
+        dp.Add("@apellido", Apellidos);
+        dp.Add("@correo", Correo);
+        dp.Add("@password", Password);
+        return dp;
+    }
 }

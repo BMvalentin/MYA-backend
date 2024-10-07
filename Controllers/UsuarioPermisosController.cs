@@ -1,9 +1,7 @@
-
-
 using Microsoft.AspNetCore.Mvc;
-using MYABackend.Responses;
 using MYABackend.Repositories;
 
+namespace MYABackend.Controllers;
 
 [ApiController]
 public class UsusarioPermisos : ControllerBase
