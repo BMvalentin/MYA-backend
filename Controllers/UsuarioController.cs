@@ -1,14 +1,12 @@
 
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using MYABackend.Responses;
-using System.Net;
-using System.Data;
-using System.Xml.Serialization;
-
-using MYABackend.Models;
-using Dapper;
 using MYABackend.Repositories;
-using Microsoft.EntityFrameworkCore.Storage;
+using MYABackend.Responses;
+using MYABackend.Models;
+using System.Net;
+using Dapper;
+
 namespace MYABackend.Controllers;
 
 [ApiController]
@@ -17,6 +15,7 @@ public class UsuarioController : ControllerBase
     public Repository repository = new Repository();
     [HttpPost]
     [Route("UsuarioController/Create")]
+    [Authorize(Policy = "Admin")]
     public async Task<BaseResponse> Create([FromBody] Usuario usuario)
     {
         if (usuario.Apellidos != null && usuario.Apellidos.Length >= 0 && usuario.Nombres != null && usuario.Nombres.Length >= 0

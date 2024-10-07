@@ -41,6 +41,36 @@ public class ProductoController : ControllerBase
             return new BaseResponse(false, (int)HttpStatusCode.InternalServerError, ex.Message);
         }
     }
+    
+    [HttpGet]
+    [Route("ProductoController/GetMarca")]
+    public async Task<BaseResponse> GetMarca()
+    {
+        try
+        {
+            var rta = await repository.GetListFromProcedure<dynamic>("obtenerMarca");
+            return new DataResponse<dynamic>(true, (int)HttpStatusCode.OK, "Lista entidad", data: rta);
+        }
+        catch (Exception ex)
+        {
+            return new BaseResponse(false, (int)HttpStatusCode.InternalServerError, ex.Message);
+        }
+    }
+    
+    [HttpGet]
+    [Route("ProductoController/GetCategoria")]
+    public async Task<BaseResponse> GetCategoria()
+    {
+        try
+        {
+            var rta = await repository.GetListFromProcedure<dynamic>("obtenerCategoria");
+            return new DataResponse<dynamic>(true, (int)HttpStatusCode.OK, "Lista entidad", data: rta);
+        }
+        catch (Exception ex)
+        {
+            return new BaseResponse(false, (int)HttpStatusCode.InternalServerError, ex.Message);
+        }
+    }
 
     [HttpPost]
     [Route("ProductoController/PostU")]

@@ -125,25 +125,43 @@ INSERT INTO rol (nombre_rol) VALUES ('Usuario'),('Admin');
 
 INSERT INTO talle (talle) VALUES 
 ('34.5 [US 4]'),
-('35 [US 4.5]'),
-('35.5 [US 5]'),
-('36 [US 5.5]'),
-('36.5 [US 6]'),
-('37 [US 6.5]'),
-('37.5 [US 7]'),
-('38 [US 7.5]'),
-('38.5 [US 8]'),
-('39 [US 8.5]'),
-('39.5 [US 9]'),
-('40 [US 9.5]'),
-('40.5 [US 10]'),
-('41 [US 10.5]'),
-('41.5 [US 11]'),
-('42 [US 11.5]'),
-('42.5 [US 12]'),
-('43 [US 12.5]'),
-('43.5 [US 13]'),
-('44 [US 13.5]'),
-('44.5 [US 14]'),
-('45 [US 14.5]'),
-('46 [US 15]');
+('35.5 [US 4.5]'),
+('36 [US 5]'),
+('36.5 [US 5.5]'),
+('37.5 [US 6]'),
+('38 [US 6.5]'),
+('38.5 [US 7]'),
+('39 [US 7.5]'),
+('39.5 [US 8]'),
+('40 [US 8.5]'),
+('41 [US 9]'),
+('41.5 [US 9.5]'),
+('42 [US 10]'),
+('43 [US 10.5]'),
+('43.5 [US 11]'),
+('44 [US 11.5]'),
+('45[US 12]'),
+('45.5 [US 12.5]'),
+('46 [US 13]');
+
+-- Insertando datos en la tabla marca
+INSERT INTO marca (descripcion) VALUES
+('Nike'),
+('Adidas'),
+('Puma'),
+('Reebok'),
+('New Balance'),
+('Asics'),
+('Under Armour'),
+('Converse');
+
+-- Insertando datos en la tabla categoria
+INSERT INTO categoria (descripcion) VALUES
+('Zapatillas de running'),
+('Zapatillas de baloncesto'),
+('Zapatillas casuales'),
+('Zapatillas de entrenamiento'),
+('Zapatillas de fútbol'),
+('Zapatillas de skate'),
+('Zapatillas de moda'),
+('Zapatillas para caminar');
