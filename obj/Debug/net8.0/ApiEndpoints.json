@@ -174,13 +174,8 @@
         "IsRequired": false
       },
       {
-        "Name": "DireccionActual",
-        "Type": "System.String",
-        "IsRequired": false
-      },
-      {
         "Name": "File",
-        "Type": "Microsoft.AspNetCore.Http.IFormFile",
+        "Type": "Microsoft.AspNetCore.Http.IFormFile[]",
         "IsRequired": false
       }
     ],

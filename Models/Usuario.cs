@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Identity;
 using Dapper;
 
 namespace MYABackend.Models;
@@ -15,7 +16,13 @@ public class Usuario
         dp.Add("@nombre", Nombres);
         dp.Add("@apellido", Apellidos);
         dp.Add("@correo", Correo);
-        dp.Add("@password", Password);
+        dp.Add("@password", HashearPassword());
         return dp;
+    }
+
+    public string HashearPassword()
+    {
+        var passwordHasher = new PasswordHasher<object>();
+        return passwordHasher.HashPassword(null, Password);
     }
 }
