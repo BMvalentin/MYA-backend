@@ -25,7 +25,7 @@ public class AuthController : ControllerBase
 
     [HttpPost]
     [Route("AuthController/Login")]
-    [Authorize(Policy = "Admin")]
+    [AllowAnonymous]
     public async Task<BaseResponse> Login([FromBody] Login auth)
     {
         if (auth.Correo != null && auth.Password != null)
