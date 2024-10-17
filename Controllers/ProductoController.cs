@@ -109,7 +109,7 @@ public class ProductoController : ControllerBase
                     {
                         await file.CopyToAsync(stream);
                     }
-                    files.Add(Path.Combine("assets", "img", newFileName));
+                    files.Add($"{basePath}\\{newFileName}");
                     i++;
                 }
             }
