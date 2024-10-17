@@ -3,10 +3,6 @@
   "WorkspaceRootPath": "C:\\Users\\hilet.HILET\\MYA-backend\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{2AE56D11-9770-4DF0-93A6-6050CE865F5A}|MYA-backend.csproj|c:\\users\\hilet.hilet\\mya-backend\\database\\insert\\producto\\crearproducto.sql||{3B902123-F8A7-4915-9F01-361F908088D0}",
-      "RelativeMoniker": "D:0:0:{2AE56D11-9770-4DF0-93A6-6050CE865F5A}|MYA-backend.csproj|solutionrelative:database\\insert\\producto\\crearproducto.sql||{3B902123-F8A7-4915-9F01-361F908088D0}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{2AE56D11-9770-4DF0-93A6-6050CE865F5A}|MYA-backend.csproj|c:\\users\\hilet.hilet\\mya-backend\\controllers\\productocontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{2AE56D11-9770-4DF0-93A6-6050CE865F5A}|MYA-backend.csproj|solutionrelative:controllers\\productocontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
@@ -23,25 +19,12 @@
             {
               "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "crearProducto.sql",
-              "DocumentMoniker": "C:\\Users\\hilet.HILET\\MYA-backend\\DataBase\\INSERT\\Producto\\crearProducto.sql",
-              "RelativeDocumentMoniker": "DataBase\\INSERT\\Producto\\crearProducto.sql",
-              "ToolTip": "C:\\Users\\hilet.HILET\\MYA-backend\\DataBase\\INSERT\\Producto\\crearProducto.sql",
-              "RelativeToolTip": "DataBase\\INSERT\\Producto\\crearProducto.sql",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAsAAAAeAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000826|",
-              "WhenOpened": "2024-10-14T12:38:57.077Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
               "Title": "ProductoController.cs",
               "DocumentMoniker": "C:\\Users\\hilet.HILET\\MYA-backend\\Controllers\\ProductoController.cs",
               "RelativeDocumentMoniker": "Controllers\\ProductoController.cs",
               "ToolTip": "C:\\Users\\hilet.HILET\\MYA-backend\\Controllers\\ProductoController.cs",
               "RelativeToolTip": "Controllers\\ProductoController.cs",
-              "ViewState": "AQIAAHUAAAAAAAAAAAAwwH8AAABJAAAA",
+              "ViewState": "AQIAAEsAAAAAAAAAAAAqwFoAAABKAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-10-14T11:39:38.583Z",
               "EditorCaption": ""

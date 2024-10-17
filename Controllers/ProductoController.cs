@@ -85,7 +85,10 @@ public class ProductoController : ControllerBase
         if (upload == null || upload.File.Length == 0) return BadRequest("No se proporcionó ningún archivo.");
         
         var files = new List<string>();
-        var basePath = Path.Combine(Directory.GetCurrentDirectory(), "MYA-frontend", "assets", "img");
+
+        string currentDirectory = Directory.GetCurrentDirectory();
+        string cleanedDirectory = currentDirectory.Replace("MYA-backend", "MYA-frontend");
+        var basePath = $"{cleanedDirectory}\\src\\Assets\\Images\\Products";
 
         // Asegúrate de que el directorio existe
         if (!Directory.Exists(basePath))
@@ -94,18 +97,20 @@ public class ProductoController : ControllerBase
         }
         try
         {
+            int i = 1;
             foreach (var file in upload.File)
             {
                 if (file.Length > 0)
                 {
-                    var fileName = Path.GetFileName(file.FileName);
-                    var path = Path.Combine(basePath, fileName);
+                    string newFileName = $"Campus-{i:D2}{Path.GetExtension(file.FileName)}";
+                    var path = Path.Combine(basePath, newFileName);
 
                     using (var stream = new FileStream(path, FileMode.Create))
                     {
                         await file.CopyToAsync(stream);
                     }
-                    files.Add(Path.Combine("assets", "img", fileName));
+                    files.Add(Path.Combine("assets", "img", newFileName));
+                    i++;
                 }
             }
 
