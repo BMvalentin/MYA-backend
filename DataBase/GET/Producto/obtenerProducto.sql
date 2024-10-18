@@ -2,6 +2,7 @@ CREATE PROCEDURE obtenerProducto
 AS
 BEGIN
   SELECT
+    p.nombre,
     p.id_producto,
     p.id_marca,
     p.id_categoria,
