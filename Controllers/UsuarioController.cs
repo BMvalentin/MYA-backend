@@ -13,7 +13,7 @@ public class UsuarioController : ControllerBase
     public Repository repository = new Repository();
     [HttpPost]
     [Route("UsuarioController/Create")]
-    [Authorize(Policy = "Admin")]
+    [AllowAnonymous]
     public async Task<BaseResponse> Create([FromBody] Usuario usuario)
     {
         if (usuario.Apellidos != null && usuario.Apellidos.Length >= 0 && usuario.Nombres != null && usuario.Nombres.Length >= 0

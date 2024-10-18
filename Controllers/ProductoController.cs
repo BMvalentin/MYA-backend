@@ -83,30 +83,38 @@ public class ProductoController : ControllerBase
     public async Task<IActionResult> PostU([FromForm] Producto upload)
     {
         if (upload == null || upload.File.Length == 0) return BadRequest("No se proporcionó ningún archivo.");
-
+        
         var files = new List<string>();
-        foreach (var file in upload.File)
+        var basePath = Path.Combine(Directory.GetCurrentDirectory(), "MYA-frontend", "assets", "img");
+
+        // Asegúrate de que el directorio existe
+        if (!Directory.Exists(basePath))
         {
-            if (file.Length > 0)
+            Directory.CreateDirectory(basePath);
+        }
+        try
+        {
+            foreach (var file in upload.File)
             {
-                var fileName = Path.GetFileName(file.FileName);
-                var path = Path.Combine("MYA-frontend", "assets", "img", fileName);
-                try
+                if (file.Length > 0)
                 {
+                    var fileName = Path.GetFileName(file.FileName);
+                    var path = Path.Combine(basePath, fileName);
+
                     using (var stream = new FileStream(path, FileMode.Create))
                     {
                         await file.CopyToAsync(stream);
                     }
-                    files.Add(Path.Combine("assets", "img", fileName)); // Guardar la ruta relativa
-                }
-                catch (Exception ex)
-                {
-                    return StatusCode(500, $"Error al subir el archivo: {ex.Message}");
+                    files.Add(Path.Combine("assets", "img", fileName));
                 }
             }
-        }
 
-        upload.RutaImagen = JsonSerializer.Serialize(files);
+            upload.RutaImagen = JsonSerializer.Serialize(files);
+        }
+        catch (Exception ex)
+        {
+            return StatusCode(500, $"Error al subir el archivo: {ex.Message}");
+        }
 
         if (string.IsNullOrEmpty(upload.Nombre) || string.IsNullOrEmpty(upload.Descripcion) ||
            upload.IdCategoria == 0 || upload.IdMarca == 0 || upload.Precio <= 0 ||
@@ -115,7 +123,14 @@ public class ProductoController : ControllerBase
             return BadRequest("No se proporcionó todos los datos necesarios.");
         }
 
-        await repository.ExecuteProcedure("crearProducto",upload.crearProducto());
+        try
+        {
+            await repository.ExecuteProcedure("crearProducto", upload.crearProducto());
+        }
+        catch (Exception ex)
+        {
+            return StatusCode(500, $"Error en la base de Datos: {ex.Message}");
+        }
 
         return Ok(new { files });
     }

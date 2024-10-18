@@ -1,5 +1,4 @@
 using System.ComponentModel.DataAnnotations;
-using Microsoft.AspNetCore.Identity;
 using Dapper;
 
 namespace MYABackend.Models;
@@ -17,12 +16,6 @@ public class Login
         var dp = new DynamicParameters();
         dp.Add("@correo", Correo);
         return dp;
-    }
-
-    public string HashearPassword()
-    {
-        var passwordHasher = new PasswordHasher<object>();
-        return passwordHasher.HashPassword(null, Password);
     }
 
 }

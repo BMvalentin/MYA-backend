@@ -8,6 +8,7 @@ using System.Security.Claims;
 using MYABackend.Models;
 using System.Text;
 using System.Net;
+using Microsoft.AspNetCore.Identity;
 
 namespace MYABackend.Controllers;
 
@@ -33,7 +34,11 @@ public class AuthController : ControllerBase
             if (rsp != null)
             {
                 UsuarioLogin user = rsp.FirstOrDefault();
-                if (user.clave == auth.Password)
+
+                var password = new PasswordHasher<object>();
+                var result = password.VerifyHashedPassword(null, user.clave, auth.Password);
+
+                if (result == PasswordVerificationResult.Success)
                 {
                     string jwt = GenerationToken(user);
                     return new DataResponse<dynamic>(true, (int)HttpStatusCode.OK, "JWT Creado", data: jwt);
