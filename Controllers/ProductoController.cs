@@ -83,18 +83,15 @@ public class ProductoController : ControllerBase
     public async Task<IActionResult> PostU([FromForm] Producto upload)
     {
         if (upload == null || upload.File.Length == 0) return BadRequest("No se proporcionó ningún archivo.");
-        
+
         var files = new List<string>();
 
         string currentDirectory = Directory.GetCurrentDirectory();
         string cleanedDirectory = currentDirectory.Replace("MYA-backend", "MYA-frontend");
-        var basePath = $"{cleanedDirectory}\\src\\Assets\\Images\\Products";
+        var basePath = Path.Combine(cleanedDirectory, "src", "Assets", "Images", "Products");
 
-        // Asegúrate de que el directorio existe
-        if (!Directory.Exists(basePath))
-        {
-            Directory.CreateDirectory(basePath);
-        }
+        if (!Directory.Exists(basePath)) Directory.CreateDirectory(basePath);
+
         try
         {
             int i = 1;
@@ -109,7 +106,9 @@ public class ProductoController : ControllerBase
                     {
                         await file.CopyToAsync(stream);
                     }
-                    files.Add($"{basePath}\\{newFileName}");
+
+                    string relativePath = Path.Combine("src", "Assets", "Images", "Products", newFileName).Replace("\\", "/");
+                    files.Add(relativePath); 
                     i++;
                 }
             }
@@ -122,8 +121,8 @@ public class ProductoController : ControllerBase
         }
 
         if (string.IsNullOrEmpty(upload.Nombre) || string.IsNullOrEmpty(upload.Descripcion) ||
-           upload.IdCategoria == 0 || upload.IdMarca == 0 || upload.Precio <= 0 ||
-           upload.Stock <= 0 || string.IsNullOrEmpty(upload.RutaImagen))
+            upload.IdCategoria == 0 || upload.IdMarca == 0 || upload.Precio <= 0 ||
+            upload.Stock <= 0 || string.IsNullOrEmpty(upload.RutaImagen))
         {
             return BadRequest("No se proporcionó todos los datos necesarios.");
         }
