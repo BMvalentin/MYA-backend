@@ -3,8 +3,9 @@ using Microsoft.AspNetCore.Mvc;
 using MYABackend.Repositories;
 using MYABackend.Responses;
 using MYABackend.Models;
-using System.Net;
 using System.Text.Json;
+using System.Net;
+using Dapper;
 
 namespace MYABackend.Controllers;
 
@@ -21,6 +22,24 @@ public class ProductoController : ControllerBase
         try
         {
             var rta = await repository.GetListFromProcedure<dynamic>("obtenerProductos");
+            return new DataResponse<dynamic>(true, (int)HttpStatusCode.OK, "Lista entidad", data: rta);
+        }
+        catch (Exception ex)
+        {
+            return new BaseResponse(false, (int)HttpStatusCode.InternalServerError, ex.Message);
+        }
+    }
+
+    [HttpGet]
+    [Route("ProductoController/GetById")]
+    [AllowAnonymous]
+    public async Task<BaseResponse> GetById(int id)
+    {
+        try
+        {
+            var dp = new DynamicParameters();
+            dp.Add("@Id",id);
+            var rta = await repository.GetListFromProcedure<dynamic>("obtenerProductoById",dp);
             return new DataResponse<dynamic>(true, (int)HttpStatusCode.OK, "Lista entidad", data: rta);
         }
         catch (Exception ex)

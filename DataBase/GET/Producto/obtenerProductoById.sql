@@ -1,4 +1,5 @@
-CREATE PROCEDURE obtenerProducto
+CREATE PROCEDURE obtenerProductoById
+  @Id INT
 AS
 BEGIN
   SELECT
@@ -24,6 +25,7 @@ BEGIN
     AND s.stock > 0 
     AND m.activo = 1 
     AND c.activo = 1
+    AND p.id_producto = @Id
   ORDER BY 
     t.talle ASC;
 END;
