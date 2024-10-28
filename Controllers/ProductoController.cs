@@ -20,7 +20,7 @@ public class ProductoController : ControllerBase
     {
         try
         {
-            var rta = await repository.GetListFromProcedure<dynamic>("obtenerProducto");
+            var rta = await repository.GetListFromProcedure<dynamic>("obtenerProductos");
             return new DataResponse<dynamic>(true, (int)HttpStatusCode.OK, "Lista entidad", data: rta);
         }
         catch (Exception ex)
