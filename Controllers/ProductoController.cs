@@ -6,12 +6,15 @@ using MYABackend.Models;
 using System.Text.Json;
 using System.Net;
 using Dapper;
+using Swashbuckle.AspNetCore.SwaggerGen;
+using System.Security.Cryptography;
 
 namespace MYABackend.Controllers;
 
 [ApiController]
 public class ProductoController : ControllerBase
 {
+    private static Dictionary<int, List<ProductoCarrito>> paginacion = new Dictionary<int, List<ProductoCarrito>>();
     private Repository repository = new Repository();
 
     [HttpGet]
@@ -24,9 +27,33 @@ public class ProductoController : ControllerBase
         var dp = new DynamicParameters();
         dp.Add("@Offset",(pageNumber-1) * pageSize);
         dp.Add("@PageSize",pageSize);
+        if (paginacion.ContainsKey(pageNumber))
+        {
+            paginacion.TryGetValue(pageNumber, out List<ProductoCarrito> productos);
+            return new DataResponse<List<ProductoCarrito>>(true, (int)HttpStatusCode.OK, "Lista entidad", data: productos);
+        }
         try
         {
-            var rta = await repository.GetListFromProcedure<dynamic>("obtenerProductos",dp);
+            var rta = await repository.GetListFromProcedure<ProductoCarrito>("obtenerProductos",dp);
+
+            paginacion.Add(pageNumber - 1, rta);
+
+            return new DataResponse<List<ProductoCarrito>>(true, (int)HttpStatusCode.OK, "Lista entidad", data: rta);
+        }
+        catch (Exception ex)
+        {
+            return new BaseResponse(false, (int)HttpStatusCode.InternalServerError, ex.Message);
+        }
+    }
+
+    [HttpGet]
+    [Route("ProductoController/GetTotalDeProductos")]
+    [AllowAnonymous]
+    public async Task<BaseResponse> GetTotalDeProductos()
+    {
+        try
+        {
+            var rta = await repository.GetListFromProcedure<dynamic>("obtenerTotalDeProductos");
             return new DataResponse<dynamic>(true, (int)HttpStatusCode.OK, "Lista entidad", data: rta);
         }
         catch (Exception ex)
