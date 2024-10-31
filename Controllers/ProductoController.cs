@@ -17,11 +17,16 @@ public class ProductoController : ControllerBase
     [HttpGet]
     [Route("ProductoController/Get")]
     [AllowAnonymous]
-    public async Task<BaseResponse> Get()
+    public async Task<BaseResponse> Get(int? page)
     {
+        int pageSize = 10; 
+        int pageNumber = page ?? 1;
+        var dp = new DynamicParameters();
+        dp.Add("@Offset",(pageNumber-1) * pageSize);
+        dp.Add("@PageSize",pageSize);
         try
         {
-            var rta = await repository.GetListFromProcedure<dynamic>("obtenerProductos");
+            var rta = await repository.GetListFromProcedure<dynamic>("obtenerProductos",dp);
             return new DataResponse<dynamic>(true, (int)HttpStatusCode.OK, "Lista entidad", data: rta);
         }
         catch (Exception ex)

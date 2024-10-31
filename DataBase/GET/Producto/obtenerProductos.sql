@@ -1,4 +1,6 @@
 CREATE PROCEDURE obtenerProductos
+  @Offset INT,
+  @PageSize INT
 AS
 BEGIN
   SELECT
@@ -10,4 +12,5 @@ BEGIN
     producto AS p
   WHERE 
     p.activo = 1 
+  ORDER BY p.id_producto OFFSET @Offset ROWS FETCH NEXT @PageSize ROWS ONLY;
 END;
