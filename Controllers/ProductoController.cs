@@ -24,14 +24,17 @@ public class ProductoController : ControllerBase
     {
         int pageSize = 10; 
         int pageNumber = page ?? 1;
+
+        if (paginacion.ContainsKey(pageNumber-1))
+        {
+            paginacion.TryGetValue(pageNumber-1, out List<ProductoCarrito> productos);
+            return new DataResponse<List<ProductoCarrito>>(true, (int)HttpStatusCode.OK, "Lista entidad", data: productos);
+        }
+
         var dp = new DynamicParameters();
         dp.Add("@Offset",(pageNumber-1) * pageSize);
         dp.Add("@PageSize",pageSize);
-        if (paginacion.ContainsKey(pageNumber))
-        {
-            paginacion.TryGetValue(pageNumber, out List<ProductoCarrito> productos);
-            return new DataResponse<List<ProductoCarrito>>(true, (int)HttpStatusCode.OK, "Lista entidad", data: productos);
-        }
+
         try
         {
             var rta = await repository.GetListFromProcedure<ProductoCarrito>("obtenerProductos",dp);
