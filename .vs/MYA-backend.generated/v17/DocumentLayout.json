@@ -3,16 +3,16 @@
   "WorkspaceRootPath": "C:\\Users\\Usuario\\MYA-backend\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{2AE56D11-9770-4DF0-93A6-6050CE865F5A}|MYA-backend.csproj|c:\\users\\usuario\\mya-backend\\database\\database.sql||{CC5D8DF0-88F4-4BB2-9DBB-B48CEE65C30A}",
-      "RelativeMoniker": "D:0:0:{2AE56D11-9770-4DF0-93A6-6050CE865F5A}|MYA-backend.csproj|solutionrelative:database\\database.sql||{CC5D8DF0-88F4-4BB2-9DBB-B48CEE65C30A}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{2AE56D11-9770-4DF0-93A6-6050CE865F5A}|MYA-backend.csproj|c:\\users\\usuario\\mya-backend\\controllers\\productocontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{2AE56D11-9770-4DF0-93A6-6050CE865F5A}|MYA-backend.csproj|solutionrelative:controllers\\productocontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{2AE56D11-9770-4DF0-93A6-6050CE865F5A}|MYA-backend.csproj|c:\\users\\usuario\\mya-backend\\database\\database.sql||{CC5D8DF0-88F4-4BB2-9DBB-B48CEE65C30A}|CodeFrame",
-      "RelativeMoniker": "D:0:0:{2AE56D11-9770-4DF0-93A6-6050CE865F5A}|MYA-backend.csproj|solutionrelative:database\\database.sql||{CC5D8DF0-88F4-4BB2-9DBB-B48CEE65C30A}|CodeFrame"
+      "AbsoluteMoniker": "D:0:0:{2AE56D11-9770-4DF0-93A6-6050CE865F5A}|MYA-backend.csproj|c:\\users\\usuario\\mya-backend\\controllers\\carritocontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2AE56D11-9770-4DF0-93A6-6050CE865F5A}|MYA-backend.csproj|solutionrelative:controllers\\carritocontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2AE56D11-9770-4DF0-93A6-6050CE865F5A}|MYA-backend.csproj|c:\\users\\usuario\\mya-backend\\controllers\\authcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2AE56D11-9770-4DF0-93A6-6050CE865F5A}|MYA-backend.csproj|solutionrelative:controllers\\authcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -22,7 +22,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 1,
+          "SelectedChildIndex": 3,
           "Children": [
             {
               "$type": "Bookmark",
@@ -30,25 +30,39 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "DataBase.sql ",
-              "DocumentMoniker": "C:\\Users\\Usuario\\MYA-backend\\DataBase\\DataBase.sql",
-              "RelativeDocumentMoniker": "DataBase\\DataBase.sql",
-              "ToolTip": "C:\\Users\\Usuario\\MYA-backend\\DataBase\\DataBase.sql",
-              "RelativeToolTip": "DataBase\\DataBase.sql",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000826|",
-              "WhenOpened": "2024-10-18T20:46:27.66Z",
+              "DocumentIndex": 1,
+              "Title": "CarritoController.cs",
+              "DocumentMoniker": "C:\\Users\\Usuario\\MYA-backend\\Controllers\\CarritoController.cs",
+              "RelativeDocumentMoniker": "Controllers\\CarritoController.cs",
+              "ToolTip": "C:\\Users\\Usuario\\MYA-backend\\Controllers\\CarritoController.cs",
+              "RelativeToolTip": "Controllers\\CarritoController.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-11-30T01:53:32.687Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 2,
+              "Title": "AuthController.cs",
+              "DocumentMoniker": "C:\\Users\\Usuario\\MYA-backend\\Controllers\\AuthController.cs",
+              "RelativeDocumentMoniker": "Controllers\\AuthController.cs",
+              "ToolTip": "C:\\Users\\Usuario\\MYA-backend\\Controllers\\AuthController.cs",
+              "RelativeToolTip": "Controllers\\AuthController.cs",
+              "ViewState": "AQIAAAMAAAAAAAAAAAAcwDQAAAAaAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-11-07T19:39:07.398Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
               "Title": "ProductoController.cs",
               "DocumentMoniker": "C:\\Users\\Usuario\\MYA-backend\\Controllers\\ProductoController.cs",
               "RelativeDocumentMoniker": "Controllers\\ProductoController.cs",
               "ToolTip": "C:\\Users\\Usuario\\MYA-backend\\Controllers\\ProductoController.cs",
               "RelativeToolTip": "Controllers\\ProductoController.cs",
-              "ViewState": "AQIAAEoAAAAAAAAAAAAowFwAAABNAAAA",
+              "ViewState": "AQIAABoAAAAAAAAAAAAgwCcAAAAMAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-10-17T12:43:41.47Z",
               "EditorCaption": ""
