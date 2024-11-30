@@ -52,7 +52,39 @@
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
-    "Parameters": [],
+    "Parameters": [
+      {
+        "Name": "page",
+        "Type": "System.Nullable\u00601[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "MYABackend.Responses.BaseResponse",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "MYABackend.Controllers.ProductoController",
+    "Method": "GetById",
+    "RelativePath": "ProductoController/GetById",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
     "ReturnTypes": [
       {
         "Type": "MYABackend.Responses.BaseResponse",
@@ -109,6 +141,26 @@
     "ContainingType": "MYABackend.Controllers.ProductoController",
     "Method": "GetTalle",
     "RelativePath": "ProductoController/GetTalle",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": [
+      {
+        "Type": "MYABackend.Responses.BaseResponse",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "MYABackend.Controllers.ProductoController",
+    "Method": "GetTotalDeProductos",
+    "RelativePath": "ProductoController/GetTotalDeProductos",
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,

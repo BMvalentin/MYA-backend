@@ -1,8 +1,9 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "C:\\Users\\Usuario\\MYA-backend\\",
+  "WorkspaceRootPath": "C:\\Users\\hilet.HILET\\MYA-backend\\",
   "Documents": [
     {
+<<<<<<< HEAD
       "AbsoluteMoniker": "D:0:0:{2AE56D11-9770-4DF0-93A6-6050CE865F5A}|MYA-backend.csproj|c:\\users\\usuario\\mya-backend\\controllers\\productocontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{2AE56D11-9770-4DF0-93A6-6050CE865F5A}|MYA-backend.csproj|solutionrelative:controllers\\productocontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
@@ -13,6 +14,10 @@
     {
       "AbsoluteMoniker": "D:0:0:{2AE56D11-9770-4DF0-93A6-6050CE865F5A}|MYA-backend.csproj|c:\\users\\usuario\\mya-backend\\controllers\\authcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{2AE56D11-9770-4DF0-93A6-6050CE865F5A}|MYA-backend.csproj|solutionrelative:controllers\\authcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+=======
+      "AbsoluteMoniker": "D:0:0:{2AE56D11-9770-4DF0-93A6-6050CE865F5A}|MYA-backend.csproj|c:\\users\\hilet.hilet\\mya-backend\\controllers\\productocontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2AE56D11-9770-4DF0-93A6-6050CE865F5A}|MYA-backend.csproj|solutionrelative:controllers\\productocontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+>>>>>>> 33a0d64eca47c3a4685b7d4633fd096ad59637d7
     }
   ],
   "DocumentGroupContainers": [
@@ -22,14 +27,15 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
+<<<<<<< HEAD
           "SelectedChildIndex": 3,
+=======
+          "SelectedChildIndex": 0,
+>>>>>>> 33a0d64eca47c3a4685b7d4633fd096ad59637d7
           "Children": [
             {
-              "$type": "Bookmark",
-              "Name": "ST:128:0:{1fc202d4-d401-403c-9834-5b218574bb67}"
-            },
-            {
               "$type": "Document",
+<<<<<<< HEAD
               "DocumentIndex": 1,
               "Title": "CarritoController.cs",
               "DocumentMoniker": "C:\\Users\\Usuario\\MYA-backend\\Controllers\\CarritoController.cs",
@@ -56,13 +62,19 @@
             },
             {
               "$type": "Document",
+=======
+>>>>>>> 33a0d64eca47c3a4685b7d4633fd096ad59637d7
               "DocumentIndex": 0,
               "Title": "ProductoController.cs",
-              "DocumentMoniker": "C:\\Users\\Usuario\\MYA-backend\\Controllers\\ProductoController.cs",
+              "DocumentMoniker": "C:\\Users\\hilet.HILET\\MYA-backend\\Controllers\\ProductoController.cs",
               "RelativeDocumentMoniker": "Controllers\\ProductoController.cs",
-              "ToolTip": "C:\\Users\\Usuario\\MYA-backend\\Controllers\\ProductoController.cs",
+              "ToolTip": "C:\\Users\\hilet.HILET\\MYA-backend\\Controllers\\ProductoController.cs",
               "RelativeToolTip": "Controllers\\ProductoController.cs",
+<<<<<<< HEAD
               "ViewState": "AQIAABoAAAAAAAAAAAAgwCcAAAAMAAAA",
+=======
+              "ViewState": "AQIAABIAAAAAAAAAAAAuwB8AAAAJAAAA",
+>>>>>>> 33a0d64eca47c3a4685b7d4633fd096ad59637d7
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-10-17T12:43:41.47Z",
               "EditorCaption": ""

@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("MYA-backend")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+e527e1270ae4b4e9fdd9a6cc05d503632e941428")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+e8f1373f962a3df67477c5e522559465d29e7fea")]
 [assembly: System.Reflection.AssemblyProductAttribute("MYA-backend")]
 [assembly: System.Reflection.AssemblyTitleAttribute("MYA-backend")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

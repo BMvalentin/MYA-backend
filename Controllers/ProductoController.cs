@@ -3,8 +3,8 @@ using Microsoft.AspNetCore.Mvc;
 using MYABackend.Repositories;
 using MYABackend.Responses;
 using MYABackend.Models;
-using System.Net;
 using System.Text.Json;
+using System.Net;
 using Dapper;
 
 namespace MYABackend.Controllers;
@@ -12,32 +12,66 @@ namespace MYABackend.Controllers;
 [ApiController]
 public class ProductoController : ControllerBase
 {
+    private static Dictionary<int, List<ProductoCarrito>> paginacion = new Dictionary<int, List<ProductoCarrito>>();
     private Repository repository = new Repository();
 
     [HttpGet]
     [Route("ProductoController/Get")]
     [AllowAnonymous]
-    public async Task<BaseResponse> Get()
+    public async Task<BaseResponse> Get(int? page)
+    {
+        int pageSize = 10; 
+        int pageNumber = page ?? 1;
+
+        if (paginacion.ContainsKey(pageNumber-1))
+        {
+            paginacion.TryGetValue(pageNumber-1, out List<ProductoCarrito> productos);
+            return new DataResponse<List<ProductoCarrito>>(true, (int)HttpStatusCode.OK, "Lista entidad", data: productos);
+        }
+
+        var dp = new DynamicParameters();
+        dp.Add("@Offset",(pageNumber-1) * pageSize);
+        dp.Add("@PageSize",pageSize);
+
+        try
+        {
+            var rta = await repository.GetListFromProcedure<ProductoCarrito>("obtenerProductos",dp);
+
+            paginacion.Add(pageNumber - 1, rta);
+
+            return new DataResponse<List<ProductoCarrito>>(true, (int)HttpStatusCode.OK, "Lista entidad", data: rta);
+        }
+        catch (Exception ex)
+        {
+            return new BaseResponse(false, (int)HttpStatusCode.InternalServerError, ex.Message);
+        }
+    }
+
+    [HttpGet]
+    [Route("ProductoController/GetTotalDeProductos")]
+    [AllowAnonymous]
+    public async Task<BaseResponse> GetTotalDeProductos()
     {
         try
         {
-            var rta = await repository.GetListFromProcedure<dynamic>("obtenerProducto");
+            var rta = await repository.GetListFromProcedure<dynamic>("obtenerTotalDeProductos");
             return new DataResponse<dynamic>(true, (int)HttpStatusCode.OK, "Lista entidad", data: rta);
         }
         catch (Exception ex)
         {
             return new BaseResponse(false, (int)HttpStatusCode.InternalServerError, ex.Message);
         }
-    }    
+    }
+
     [HttpGet]
     [Route("ProductoController/GetById")]
     [AllowAnonymous]
-    public async Task<BaseResponse> GetById([FromQuery] int id)
+    public async Task<BaseResponse> GetById(int id)
     {
         try
         {
             var dp = new DynamicParameters();
-            dp.Add("ID", id);
+            dp.Add("@Id",id);
             var rta = await repository.GetListFromProcedure<dynamic>("obtenerProductoById",dp);
             return new DataResponse<dynamic>(true, (int)HttpStatusCode.OK, "Lista entidad", data: rta);
         }
