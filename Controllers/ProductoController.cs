@@ -7,6 +7,7 @@ using MYABackend.Models;
 using System.Text.Json;
 using System.Net;
 using Dapper;
+using System.Security.Cryptography;
 
 namespace MYABackend.Controllers;
 
@@ -144,11 +145,11 @@ public class ProductoController : ControllerBase
     [HttpPost]
     [Route("ProductoController/PostU")]
     [Authorize(Policy ="Admin")]
-    public async Task<IActionResult> PostU([FromForm] Producto upload)
+    public async Task<BaseResponse> PostU([FromForm] Producto upload)
     {
-        if (upload == null || upload.File.Length == 0) return BadRequest("No se proporcionó ningún archivo.");
+        if (upload == null || upload.File.Length == 0) return new BaseResponse(false, (int) HttpStatusCode.InternalServerError, "No se proporcionó ningún archivo.");
 
-        var files = new List<string>();
+    var files = new List<string>();
 
         string currentDirectory = Directory.GetCurrentDirectory();
         string cleanedDirectory = currentDirectory.Replace("MYA-backend", "MYA-frontend");
@@ -163,7 +164,7 @@ public class ProductoController : ControllerBase
             {
                 if (file.Length > 0)
                 {
-                    string newFileName = $"Campus-{i:D2}{Path.GetExtension(file.FileName)}";
+                    string newFileName = $"{upload.Nombre}-{i:D2}{Path.GetExtension(file.FileName)}";
                     var path = Path.Combine(basePath, newFileName);
 
                     using (var stream = new FileStream(path, FileMode.Create))
@@ -181,14 +182,14 @@ public class ProductoController : ControllerBase
         }
         catch (Exception ex)
         {
-            return StatusCode(500, $"Error al subir el archivo: {ex.Message}");
+            return new BaseResponse(false, (int)HttpStatusCode.InternalServerError, ex.Message);
         }
 
         if (string.IsNullOrEmpty(upload.Nombre) || string.IsNullOrEmpty(upload.Descripcion) ||
             upload.IdCategoria == 0 || upload.IdMarca == 0 || upload.Precio <= 0 ||
             upload.Stock <= 0 || string.IsNullOrEmpty(upload.RutaImagen))
         {
-            return BadRequest("No se proporcionó todos los datos necesarios.");
+            return new BaseResponse(false, (int)HttpStatusCode.InternalServerError, "No se proporcionó todos los datos necesarios.");
         }
 
         try
@@ -197,9 +198,8 @@ public class ProductoController : ControllerBase
         }
         catch (Exception ex)
         {
-            return StatusCode(500, $"Error en la base de Datos: {ex.Message}");
+            return new BaseResponse(false, (int)HttpStatusCode.InternalServerError, $"Error en la base de Datos: {ex.Message}");
         }
-
-        return Ok(new { files });
+        return new DataResponse<dynamic>(true, (int)HttpStatusCode.OK, "Lista entidad", data: files);
     }
 }

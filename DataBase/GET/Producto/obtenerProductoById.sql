@@ -8,7 +8,7 @@ BEGIN
     p.id_marca,
     p.id_categoria,
     p.precio,
-    p.descripcion,
+    p.descripcion AS descripcion_producto,
     p.url_imagen,
     t.talle,
     s.stock,
