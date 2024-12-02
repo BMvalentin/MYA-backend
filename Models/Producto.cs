@@ -3,15 +3,16 @@ using Dapper;
 namespace MYABackend.Models;
 public class Producto
 {
-    public string Nombre { get; set; }
-    public string Descripcion { get; set; }
-    public int IdMarca { get; set; }
-    public int IdCategoria { get; set; }
-    public int IdTalle { get; set; }
-    public decimal Precio { get; set; }
-    public int Stock { get; set; }
-    public string? RutaImagen { get; set; }
-    public IFormFile[] File { get; set; }
+    public int IdProducto { get; set; } = int.MinValue;
+    public string Nombre { get; set; } = string.Empty;
+    public string Descripcion { get; set; } = string.Empty;
+    public int IdMarca { get; set; } = int.MinValue;
+    public int IdCategoria { get; set; } = int.MinValue;
+    public int IdTalle { get; set; } = int.MinValue;
+    public decimal Precio { get; set; } = decimal.MinValue;
+    public int Stock { get; set; } = int.MinValue;
+    public string RutaImagen { get; set; } = string.Empty;
+    public IFormFile[] File { get; set; } = new IFormFile[0];
 
     public DynamicParameters crearProducto()
     {
