@@ -7,10 +7,6 @@
       "RelativeMoniker": "D:0:0:{2AE56D11-9770-4DF0-93A6-6050CE865F5A}|MYA-backend.csproj|solutionrelative:controllers\\productocontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{2AE56D11-9770-4DF0-93A6-6050CE865F5A}|MYA-backend.csproj|c:\\users\\usuario\\mya-backend\\models\\productos\\productosbyid.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{2AE56D11-9770-4DF0-93A6-6050CE865F5A}|MYA-backend.csproj|solutionrelative:models\\productos\\productosbyid.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{2AE56D11-9770-4DF0-93A6-6050CE865F5A}|MYA-backend.csproj|c:\\users\\usuario\\mya-backend\\models\\producto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{2AE56D11-9770-4DF0-93A6-6050CE865F5A}|MYA-backend.csproj|solutionrelative:models\\producto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
@@ -22,37 +18,24 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 3,
+          "SelectedChildIndex": 2,
           "Children": [
             {
-              "$type": "Bookmark",
-              "Name": "ST:128:0:{1fc202d4-d401-403c-9834-5b218574bb67}"
-            },
-            {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 1,
               "Title": "Producto.cs",
               "DocumentMoniker": "C:\\Users\\Usuario\\MYA-backend\\Models\\Producto.cs",
               "RelativeDocumentMoniker": "Models\\Producto.cs",
               "ToolTip": "C:\\Users\\Usuario\\MYA-backend\\Models\\Producto.cs",
               "RelativeToolTip": "Models\\Producto.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAADwvwIAAAAAAAAA",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAsAAAA7AAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-12-01T19:16:05.309Z",
               "EditorCaption": ""
             },
             {
-              "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "ProductosById.cs",
-              "DocumentMoniker": "C:\\Users\\Usuario\\MYA-backend\\Models\\Productos\\ProductosById.cs",
-              "RelativeDocumentMoniker": "Models\\Productos\\ProductosById.cs",
-              "ToolTip": "C:\\Users\\Usuario\\MYA-backend\\Models\\Productos\\ProductosById.cs",
-              "RelativeToolTip": "Models\\Productos\\ProductosById.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAoAAABFAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-12-01T19:15:04.449Z",
-              "EditorCaption": ""
+              "$type": "Bookmark",
+              "Name": "ST:128:0:{1fc202d4-d401-403c-9834-5b218574bb67}"
             },
             {
               "$type": "Document",
@@ -62,7 +45,7 @@
               "RelativeDocumentMoniker": "Controllers\\ProductoController.cs",
               "ToolTip": "C:\\Users\\Usuario\\MYA-backend\\Controllers\\ProductoController.cs",
               "RelativeToolTip": "Controllers\\ProductoController.cs",
-              "ViewState": "AQIAADEAAAAAAAAAAAAgwFIAAAAdAAAA",
+              "ViewState": "AQIAAJcAAAAAAAAAAAAuwJwAAAApAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-10-17T12:43:41.47Z",
               "EditorCaption": ""

@@ -7,6 +7,8 @@ using MYABackend.Models;
 using System.Text.Json;
 using System.Net;
 using Dapper;
+using System.Runtime.Intrinsics.Arm;
+using System.Security.Cryptography;
 
 namespace MYABackend.Controllers;
 
@@ -140,31 +142,54 @@ public class ProductoController : ControllerBase
             return new BaseResponse(false, (int)HttpStatusCode.InternalServerError, ex.Message);
         }
     }
+
     [HttpPatch]
     [Route("ProductoController/Modificar")]
     [Authorize(Policy = "Admin")]
-    public async Task<IActionResult> Patch([FromBody] Producto upload)
+    public async Task<BaseResponse> Patch([FromBody] Producto upload)
     {
-        if (upload == null || upload.IdProducto <= 0)
-        {
-            return BadRequest("Datos invalidos");
-        }
+        if (upload == null || upload.IdProducto <= 0) return new BaseResponse(false, (int)HttpStatusCode.InternalServerError, "No hay ID");
+        Producto p;
         try
         {
             var dp = new DynamicParameters();
-            dp.Add("@IdProducto", upload.IdProducto);
-            dp.Add("@Nombre", upload.Nombre);
-            dp.Add("@Descripcion", upload.Descripcion);
-            dp.Add("@IdCategoria", upload.IdCategoria);
-            dp.Add("@IdMarca", upload.IdMarca);
-            dp.Add("@Precio", upload.Precio);
-            dp.Add("@Stock", upload.Stock);
-            dp.Add("@RutaImagen", upload.RutaImagen);
+            dp.Add("@Id", upload.IdProducto);
+            List<Producto> rsp = await repository.GetListFromProcedure<Producto>("obtenerProductoParaModificar", dp);
+            p = rsp.FirstOrDefault();
+        }
+        catch (Exception ex)
+        {
+            return new BaseResponse(false, (int)HttpStatusCode.InternalServerError, ex.Message);
+        }
 
-            await repository.ExecuteProcedure("actualizarProducto", dp);
-            return Ok(new { success = true, message = "Producto actualizado correctamente" });
-        } catch (Exception e){
-             return StatusCode(500, new { success = false, message = $"Error al actualizar el producto: {e.Message}" });
+        try
+        {
+            var idProducto = string.IsNullOrWhiteSpace(Convert.ToString(upload.IdProducto)) ? p.IdProducto : upload.IdProducto;
+            var idCategoria = string.IsNullOrWhiteSpace(Convert.ToString(upload.IdCategoria)) ? p.IdCategoria : upload.IdCategoria;
+            var idMarca = string.IsNullOrWhiteSpace(Convert.ToString(upload.IdMarca)) ? p.IdMarca : upload.IdMarca;
+            var idTalle = string.IsNullOrWhiteSpace(Convert.ToString(upload.IdTalle)) ? p.IdMarca : upload.IdTalle;
+            var nombre = string.IsNullOrWhiteSpace(Convert.ToString(upload.Nombre)) ? p.Nombre : upload.Nombre;
+            var descripcion = string.IsNullOrWhiteSpace(upload.Descripcion) ? p.Descripcion : upload.Descripcion;
+            var precio= string.IsNullOrWhiteSpace(Convert.ToString(upload.IdTalle)) ? p.Precio : upload.Precio;
+            var stock = string.IsNullOrWhiteSpace(Convert.ToString(upload.Stock)) ? p.Stock : upload.Stock;
+            var rutaImagen = string.IsNullOrWhiteSpace(upload.RutaImagen) ? p.RutaImagen : upload.RutaImagen;
+
+            var dp = new DynamicParameters();
+            dp.Add("@IdProducto", idProducto);
+            dp.Add("@IdCategoria", idCategoria);
+            dp.Add("@IdMarca", idMarca);
+            dp.Add("@IdTalle", idTalle);
+            dp.Add("@Nombre", nombre);
+            dp.Add("@Descripcion", descripcion);
+            dp.Add("@Precio", precio);
+            dp.Add("@Stock", stock);
+            dp.Add("@RutaImagen", rutaImagen);
+
+            var rsp = await repository.ExecuteProcedure("actualizarProducto", dp);
+
+            return new DataResponse<dynamic>(true, (int)HttpStatusCode.OK, "Lista entidad", data: rsp);
+        } catch (Exception ex){
+            return new BaseResponse(false, (int)HttpStatusCode.InternalServerError, ex.Message);
         }
     }
 

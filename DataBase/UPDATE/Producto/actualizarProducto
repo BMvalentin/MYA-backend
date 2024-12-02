@@ -2,6 +2,7 @@ CREATE PROCEDURE actualizarProducto
     @IdProducto INT,
     @Nombre NVARCHAR(100),
     @Descripcion NVARCHAR(MAX),
+    @IdTalle INT,
     @IdCategoria INT,
     @IdMarca INT,
     @Precio DECIMAL(18, 2),
@@ -9,14 +10,13 @@ CREATE PROCEDURE actualizarProducto
     @RutaImagen NVARCHAR(MAX)
 AS
 BEGIN
-    SET NOCOUNT ON;
-
     UPDATE Productos
     SET 
         Nombre = @Nombre,
         Descripcion = @Descripcion,
         IdCategoria = @IdCategoria,
         IdMarca = @IdMarca,
+        IdTalle = @IdTalle,
         Precio = @Precio,
         Stock = @Stock,
         RutaImagen = @RutaImagen
