@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Authorization;
+using MYABackend.Models.Productos;
 using Microsoft.AspNetCore.Mvc;
 using MYABackend.Repositories;
 using MYABackend.Responses;
@@ -13,6 +14,7 @@ namespace MYABackend.Controllers;
 public class ProductoController : ControllerBase
 {
     private static Dictionary<int, List<ProductoCarrito>> paginacion = new Dictionary<int, List<ProductoCarrito>>();
+    private static Dictionary<int, List<ProductosById>> productos = new Dictionary<int, List<ProductosById>>();
     private Repository repository = new Repository();
 
     [HttpGet]
@@ -25,8 +27,8 @@ public class ProductoController : ControllerBase
 
         if (paginacion.ContainsKey(pageNumber-1))
         {
-            paginacion.TryGetValue(pageNumber-1, out List<ProductoCarrito> productos);
-            return new DataResponse<List<ProductoCarrito>>(true, (int)HttpStatusCode.OK, "Lista entidad", data: productos);
+            paginacion.TryGetValue(pageNumber-1, out List<ProductoCarrito> producto);
+            return new DataResponse<List<ProductoCarrito>>(true, (int)HttpStatusCode.OK, "Lista entidad", data: producto);
         }
 
         var dp = new DynamicParameters();
@@ -68,11 +70,21 @@ public class ProductoController : ControllerBase
     [AllowAnonymous]
     public async Task<BaseResponse> GetById(int id)
     {
+
+        if (productos.ContainsKey(id))
+        {
+            productos.TryGetValue(id, out List<ProductosById> producto);
+            return new DataResponse<List<ProductosById>>(true, (int)HttpStatusCode.OK, "Lista entidad", data: producto);
+        }
+
         try
         {
             var dp = new DynamicParameters();
             dp.Add("@Id",id);
-            var rta = await repository.GetListFromProcedure<dynamic>("obtenerProductoById",dp);
+            var rta = await repository.GetListFromProcedure<ProductosById>("obtenerProductoById",dp);
+
+            productos.Add(id, rta);
+
             return new DataResponse<dynamic>(true, (int)HttpStatusCode.OK, "Lista entidad", data: rta);
         }
         catch (Exception ex)
