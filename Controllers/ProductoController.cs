@@ -22,22 +22,22 @@ public class ProductoController : ControllerBase
     [AllowAnonymous]
     public async Task<BaseResponse> Get(int? page)
     {
-        int pageSize = 10; 
+        int pageSize = 10;
         int pageNumber = page ?? 1;
 
-        if (paginacion.ContainsKey(pageNumber-1))
+        if (paginacion.ContainsKey(pageNumber - 1))
         {
-            paginacion.TryGetValue(pageNumber-1, out List<ProductoCarrito> producto);
+            paginacion.TryGetValue(pageNumber - 1, out List<ProductoCarrito> producto);
             return new DataResponse<List<ProductoCarrito>>(true, (int)HttpStatusCode.OK, "Lista entidad", data: producto);
         }
 
         var dp = new DynamicParameters();
-        dp.Add("@Offset",(pageNumber-1) * pageSize);
-        dp.Add("@PageSize",pageSize);
+        dp.Add("@Offset", (pageNumber - 1) * pageSize);
+        dp.Add("@PageSize", pageSize);
 
         try
         {
-            var rta = await repository.GetListFromProcedure<ProductoCarrito>("obtenerProductos",dp);
+            var rta = await repository.GetListFromProcedure<ProductoCarrito>("obtenerProductos", dp);
 
             paginacion.Add(pageNumber - 1, rta);
 
@@ -80,8 +80,8 @@ public class ProductoController : ControllerBase
         try
         {
             var dp = new DynamicParameters();
-            dp.Add("@Id",id);
-            var rta = await repository.GetListFromProcedure<ProductosById>("obtenerProductoById",dp);
+            dp.Add("@Id", id);
+            var rta = await repository.GetListFromProcedure<ProductosById>("obtenerProductoById", dp);
 
             productos.Add(id, rta);
 
@@ -95,7 +95,7 @@ public class ProductoController : ControllerBase
 
     [HttpGet]
     [Route("ProductoController/GetTalle")]
-    [Authorize(Policy ="Admin")]
+    [Authorize(Policy = "Admin")]
     public async Task<BaseResponse> GetTalle()
     {
         try
@@ -108,10 +108,10 @@ public class ProductoController : ControllerBase
             return new BaseResponse(false, (int)HttpStatusCode.InternalServerError, ex.Message);
         }
     }
-    
+
     [HttpGet]
     [Route("ProductoController/GetMarca")]
-    [Authorize(Policy ="Admin")]
+    [Authorize(Policy = "Admin")]
     public async Task<BaseResponse> GetMarca()
     {
         try
@@ -124,10 +124,10 @@ public class ProductoController : ControllerBase
             return new BaseResponse(false, (int)HttpStatusCode.InternalServerError, ex.Message);
         }
     }
-    
+
     [HttpGet]
     [Route("ProductoController/GetCategoria")]
-    [Authorize(Policy ="Admin")]
+    [Authorize(Policy = "Admin")]
     public async Task<BaseResponse> GetCategoria()
     {
         try
@@ -140,10 +140,37 @@ public class ProductoController : ControllerBase
             return new BaseResponse(false, (int)HttpStatusCode.InternalServerError, ex.Message);
         }
     }
+    [HttpPatch]
+    [Route("ProductoController/Modificar")]
+    [Authorize(Policy = "Admin")]
+    public async Task<IActionResult> Patch([FromBody] Producto upload)
+    {
+        if (upload == null || upload.IdProducto <= 0)
+        {
+            return BadRequest("Datos invalidos");
+        }
+        try
+        {
+            var dp = new DynamicParameters();
+            dp.Add("@IdProducto", upload.IdProducto);
+            dp.Add("@Nombre", upload.Nombre);
+            dp.Add("@Descripcion", upload.Descripcion);
+            dp.Add("@IdCategoria", upload.IdCategoria);
+            dp.Add("@IdMarca", upload.IdMarca);
+            dp.Add("@Precio", upload.Precio);
+            dp.Add("@Stock", upload.Stock);
+            dp.Add("@RutaImagen", upload.RutaImagen);
+
+            await repository.ExecuteProcedure("actualizarProducto", dp);
+            return Ok(new { success = true, message = "Producto actualizado correctamente" });
+        } catch (Exception e){
+             return StatusCode(500, new { success = false, message = $"Error al actualizar el producto: {e.Message}" });
+        }
+    }
 
     [HttpPost]
     [Route("ProductoController/PostU")]
-    [Authorize(Policy ="Admin")]
+    [Authorize(Policy = "Admin")]
     public async Task<IActionResult> PostU([FromForm] Producto upload)
     {
         if (upload == null || upload.File.Length == 0) return BadRequest("No se proporcionó ningún archivo.");
@@ -172,7 +199,7 @@ public class ProductoController : ControllerBase
                     }
 
                     string relativePath = Path.Combine("src", "Assets", "Images", "Products", newFileName).Replace("\\", "/");
-                    files.Add(relativePath); 
+                    files.Add(relativePath);
                     i++;
                 }
             }

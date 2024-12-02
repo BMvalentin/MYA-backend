@@ -246,3 +246,4 @@ C:\Users\hilet.HILET\MYA-backend\obj\Debug\net8.0\refint\MYA-backend.dll
 C:\Users\hilet.HILET\MYA-backend\obj\Debug\net8.0\MYA-backend.pdb
 C:\Users\hilet.HILET\MYA-backend\obj\Debug\net8.0\MYA-backend.genruntimeconfig.cache
 C:\Users\hilet.HILET\MYA-backend\obj\Debug\net8.0\ref\MYA-backend.dll
+c:\Users\PC\MYA-backend\bin\Debug\net8.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
