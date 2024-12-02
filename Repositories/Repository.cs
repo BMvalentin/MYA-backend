@@ -2,11 +2,12 @@ using Microsoft.Data.SqlClient;
 using Dapper;
 using System.Data;
 
-namespace SistemasCafeBackEnd.Repositories
+namespace MYABackend.Repositories
 {
     public class Repository
     {
-        private string dbConexion = "";
+        private string dbConexion = "workstation id=MYADataBase.mssql.somee.com;packet size=4096;user id=LuchoCeles_SQLLogin_1;pwd=x5ivqojpfh;data source=MYADataBase.mssql.somee.com;persist security info=False;initial catalog=MYADataBase;TrustServerCertificate=True";
+
         public Repository() { }
         
         public async Task<dynamic> ExecuteProcedure(string procedureName, DynamicParameters parameters)

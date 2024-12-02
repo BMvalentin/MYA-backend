@@ -6,6 +6,7 @@ using System.Data;
 
 namespace MYABackend.Controllers;
 
+[ApiController]
 public class CarritoController : ControllerBase
 {
     [HttpGet]
